@@ -24,51 +24,52 @@
       <!-- Środkowa kolumna (POSTY) -->
       <div class="col-12 col-md-8 col-lg-6">
 
-        <!-- Dodaj nowy post -->
+        <!-- Dodaj nowy post (ZMODYFIKOWANE DLA BACKENDU) -->
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-body">
             <div class="d-flex">
               <div class="bg-secondary rounded-circle me-2" style="width: 40px; height: 40px;"></div>
-              <input type="text" class="form-control rounded-pill bg-light border-0" placeholder="Co słychać?">
+              <!-- Tutaj dodaliśmy ngModel i obsługę Entera -->
+              <input [(ngModel)]="newPostContent" (keyup.enter)="addPost()" type="text" class="form-control rounded-pill bg-light border-0" placeholder="Co słychać? (Naciśnij Enter aby dodać)">
             </div>
           </div>
         </div>
 
-        <!-- Przykładowy Post 1 -->
-        <div class="card border-0 shadow-sm mb-4">
+        <!-- LISTA POSTÓW Z BAZY DANYCH (ZAMIAST SZTYWNYCH KART) -->
+        <!-- Jeśli nie ma postów, wyświetl komunikat -->
+        <div *ngIf="posts.length === 0" class="text-center text-muted py-5">
+          <i class="bi bi-chat-square-dots fs-1"></i>
+          <p class="mt-2">Brak postów. Bądź pierwszy!</p>
+        </div>
+
+        <!-- Pętla *ngFor - generuje karty na podstawie danych z json-server -->
+        <div *ngFor="let post of posts" class="card border-0 shadow-sm mb-4">
           <div class="card-header bg-white border-0 d-flex align-items-center">
-            <div class="bg-info rounded-circle me-2" style="width: 40px; height: 40px;"></div>
+            <!-- Kolor avatara też bierzemy z bazy -->
+            <div [class]="post.avatarColor || 'bg-primary'" class="rounded-circle me-2" style="width: 40px; height: 40px;"></div>
             <div>
-              <h6 class="mb-0 fw-bold">Anna Nowak</h6>
-              <small class="text-muted">2 godz. temu</small>
+              <h6 class="mb-0 fw-bold">{{ post.author }}</h6>
+              <small class="text-muted">{{ post.time }}</small>
             </div>
-            <i class="bi bi-three-dots ms-auto"></i>
+            <i class="bi bi-three-dots ms-auto" style="cursor: pointer;"></i>
           </div>
-          <!-- Obrazek posta (placeholder) -->
-          <div style="height: 300px; background-color: #e9ecef;" class="d-flex align-items-center justify-content-center">
-            <span class="text-muted">Zdjęcie posta</span>
-          </div>
+
+          <!-- Treść posta -->
           <div class="card-body">
-            <p class="card-text">Wspaniały dzień na spacer po Warszawie! ☀️ #warszawa #randka</p>
+            <p class="card-text">{{ post.content }}</p>
           </div>
+
+          <!-- Stopka posta (lajki i przyciski) -->
           <div class="card-footer bg-white border-0 d-flex justify-content-between text-secondary">
-            <span><i class="bi bi-heart me-1"></i> Lubię to!</span>
-            <span><i class="bi bi-chat me-1"></i> Komentarz</span>
-            <span><i class="bi bi-share me-1"></i> Udostępnij</span>
-          </div>
-        </div>
-
-        <!-- Przykładowy Post 2 -->
-        <div class="card border-0 shadow-sm mb-4">
-          <div class="card-header bg-white border-0 d-flex align-items-center">
-            <div class="bg-warning rounded-circle me-2" style="width: 40px; height: 40px;"></div>
-            <div>
-              <h6 class="mb-0 fw-bold">Piotr Kowalski</h6>
-              <small class="text-muted">5 godz. temu</small>
-            </div>
-          </div>
-          <div class="card-body">
-            <p class="card-text">Szukam kogoś na wspólną kawę w ten weekend. Ktoś chętny? ☕</p>
+            <button class="btn btn-sm btn-light text-secondary w-100">
+              <i class="bi bi-heart me-1"></i> {{ post.likes || 0 }}
+            </button>
+            <button class="btn btn-sm btn-light text-secondary w-100">
+              <i class="bi bi-chat me-1"></i> Komentarz
+            </button>
+            <button class="btn btn-sm btn-light text-secondary w-100">
+              <i class="bi bi-share me-1"></i> Udostępnij
+            </button>
           </div>
         </div>
 
