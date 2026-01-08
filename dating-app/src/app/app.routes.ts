@@ -6,6 +6,7 @@ import { Messages } from './components/messages/messages';
 import { Profile } from './components/profile/profile';
 import { Layout } from './components/layout/layout';
 import { Events } from './components/events/events';
+import { Register } from './components/register/register';
 
 export const routes: Routes = [
   { path: 'login', component : Login },
@@ -18,7 +19,8 @@ export const routes: Routes = [
       { path: 'feed', component: Feed },
       { path: 'messages', component: Messages },
       { path: 'profile', component: Profile },
-      { path: 'events', component: Events }
+      { path: 'events', component: Events },
+      { path: 'register', component: Register }
     ]
   },
 

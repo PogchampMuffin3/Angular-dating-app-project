@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectorRef} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -16,17 +16,20 @@ export class Login {
 
   private authService = inject(Auth);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   onLogin(){
-    console.log("Próba logowania danymi:", this.loginData);
-
-    this.authService.login(this.loginData.email, this.loginData.password).subscribe(() => {
-      const user = this.authService.getCurrentUserValue();
-      if(user){
-        this.router.navigate(['/feed']);
-      }
-      else{
-        this.errorMessage = 'Bledne dane logowania';
+    this.errorMessage = '';
+    this.authService.login(this.loginData.email, this.loginData.password).subscribe({
+      next: (response) => {
+        const user = this.authService.getCurrentUserValue();
+        if(user){
+          this.router.navigate(['/feed']);
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Błędne dane';
+        this.cdr.detectChanges();
       }
     });
   }

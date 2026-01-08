@@ -26,6 +26,18 @@ export class Auth {
     );
   }
 
+  register(name: string, email: string, pass: string) {
+    return this.http.post<any>('http://localhost:3000/register', { name: name, email: email, password: pass }).pipe(
+      tap(response => {
+        if (response.token) {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          this.currentUserSubject.next(response.user);
+        }
+      })
+    );
+  }
+
   autoLogin(){
     const savedUser = localStorage.getItem('user');
     if(savedUser){
