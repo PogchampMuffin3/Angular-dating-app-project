@@ -55,6 +55,22 @@
       "time": "Przed chwilą",
       "content": "TEST",
       "likes": 0
+    },
+    {
+      "id": 1767907989366,
+      "author": "Jan Kowalski",
+      "avatarColor": "bg-primary",
+      "time": "Przed chwilą",
+      "content": "TESTT",
+      "likes": 0
+    },
+    {
+      "id": 1767908004099,
+      "author": "Anna Nowak",
+      "avatarColor": "bg-danger",
+      "time": "Przed chwilą",
+      "content": "TEST",
+      "likes": 0
     }
   ],
   "users": [

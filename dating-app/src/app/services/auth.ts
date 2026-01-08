@@ -13,13 +13,15 @@ export class Auth {
   currentUser$ = this.currentUserSubject.asObservable();
 
   login(email: string, pass: string){
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      tap(users => {
-        const user = users.find(u => u.email === email && u.password === pass);
-        if (user) {
-          this.currentUserSubject.next(user);
-          localStorage.setItem('user', JSON.stringify(user));
-        }
+    return this.http.post<any>('http://localhost:3000/login', {email, password: pass}).pipe(
+      tap(response => {
+        if (response.token) {
+          console.log("Token JWT:", response.token); // Pokaż to prowadzącemu!
+
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          this.currentUserSubject.next(response.user);
+          }
       })
     );
   }
