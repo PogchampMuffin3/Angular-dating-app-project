@@ -1,0 +1,12 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "author": "Anna Nowak",
+      "avatarColor": "bg-danger",
+      "time": "08.01.2026",
+      "content": "To jest pierwszy post z bazy danych! 🚀",
+      "likes": 5
+    }
+  ]
+}
