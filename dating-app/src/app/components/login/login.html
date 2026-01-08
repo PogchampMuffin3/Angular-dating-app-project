@@ -5,14 +5,18 @@
       <h2 class="mt-2">DatingApp</h2>
     </div>
 
-    <div class="mb-3">
-      <input type="email" class="form-control rounded-pill" placeholder="E-mail">
-    </div>
-    <div class="mb-4">
-      <input type="password" class="form-control rounded-pill" placeholder="Hasło">
+    <div *ngIf="errorMessage" class="alert alert-danger p-2 text-center text-small mb-3">
+      {{ errorMessage }}
     </div>
 
-    <button class="btn btn-primary w-100 rounded-pill mb-3" routerLink="/feed">Zaloguj się</button>
+    <div class="mb-3">
+      <input [(ngModel)]="loginData.email" type="email" class="form-control rounded-pill" placeholder="E-mail">
+    </div>
+    <div class="mb-4">
+      <input [(ngModel)]="loginData.password" type="password" class="form-control rounded-pill" placeholder="Hasło">
+    </div>
+
+    <button (click)="onLogin()" class="btn btn-primary w-100 rounded-pill mb-3">Zaloguj się</button>
 
     <div class="text-center">
       <small>Nie masz konta? <a href="#">Zarejestruj się</a></small>

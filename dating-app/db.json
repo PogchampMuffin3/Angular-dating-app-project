@@ -47,6 +47,14 @@
       "time": "Przed chwilą",
       "content": "sdfsdf",
       "likes": 0
+    },
+    {
+      "id": "50e6",
+      "author": "Jan Kowalski",
+      "avatarColor": "bg-primary",
+      "time": "Przed chwilą",
+      "content": "TEST",
+      "likes": 0
     }
   ],
   "users": [
