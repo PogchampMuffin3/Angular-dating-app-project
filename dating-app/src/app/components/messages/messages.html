@@ -1,0 +1,104 @@
+<!-- Kontener główny -->
+<div class="container-fluid p-0 d-flex flex-column h-100 bg-white">
+
+
+  <!-- GŁÓWNA ZAWARTOŚĆ (GRID) -->
+  <div class="row g-0 flex-grow-1 h-100">
+
+    <!-- KOLUMNA LEWA: LISTA OSÓB -->
+    <!-- Na mobile: ukryj, jeśli wybrano użytkownika (*ngIf) -->
+    <!-- Na desktop (d-md-block): zawsze pokazuj -->
+    <div class="col-md-4 col-lg-3 border-end h-100 overflow-auto"
+         [class.d-none]="selectedUser"
+         class="d-md-block">
+
+      <div class="p-3 bg-light border-bottom">
+        <h5 class="fw-bold mb-0">Wiadomości</h5>
+      </div>
+
+      <!-- Lista użytkowników -->
+      <div class="list-group list-group-flush">
+        <a *ngFor="let user of users"
+           (click)="selectUser(user)"
+           class="list-group-item list-group-item-action p-3 cursor-pointer"
+           style="cursor: pointer;">
+          <div class="d-flex align-items-center">
+            <!-- Awatar -->
+            <div [class]="user.avatar" class="rounded-circle text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+              {{ user.name.charAt(0) }}
+            </div>
+            <!-- Tekst -->
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between">
+                <h6 class="mb-0 fw-bold">{{ user.name }}</h6>
+                <small class="text-muted">{{ user.time }}</small>
+              </div>
+              <small class="text-muted text-truncate d-block" style="max-width: 180px;">{{ user.lastMsg }}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- KOLUMNA PRAWA: OKNO CZATU -->
+    <!-- Na mobile: pokaż tylko jeśli wybrano użytkownika -->
+    <!-- Na desktop: zawsze widoczne -->
+    <div class="col-md-8 col-lg-9 d-flex flex-column h-100"
+         [class.d-none]="!selectedUser && 'd-md-none'">
+
+      <!-- Stan pusty (tylko Desktop) - gdy nikt nie jest wybrany -->
+      <div *ngIf="!selectedUser" class="d-none d-md-flex flex-column align-items-center justify-content-center h-100 text-muted">
+        <i class="bi bi-chat-square-text fs-1 mb-3"></i>
+        <h4>Wybierz rozmowę, aby zacząć pisać</h4>
+      </div>
+
+      <!-- WŁAŚCIWY CZAT -->
+      <div *ngIf="selectedUser" class="d-flex flex-column h-100">
+
+        <!-- Nagłówek czatu -->
+        <div class="p-3 border-bottom d-flex align-items-center bg-white sticky-top shadow-sm">
+          <!-- Strzałka powrotu (tylko mobile) -->
+          <button (click)="backToList()" class="btn btn-link text-dark d-md-none me-2 text-decoration-none">
+            <i class="bi bi-arrow-left fs-4"></i>
+          </button>
+
+          <div [class]="selectedUser.avatar" class="rounded-circle text-white d-flex align-items-center justify-content-center me-2" style="width: 40px; height: 40px;">
+            {{ selectedUser.name.charAt(0) }}
+          </div>
+          <h6 class="mb-0 fw-bold">{{ selectedUser.name }}</h6>
+          <i class="bi bi-info-circle ms-auto text-muted fs-4"></i>
+        </div>
+
+        <!-- Obszar wiadomości (Scrollowalny) -->
+        <div class="flex-grow-1 p-3 overflow-auto bg-light">
+          <!-- Wiadomość od kogoś -->
+          <div class="d-flex mb-3">
+            <div [class]="selectedUser.avatar" class="rounded-circle me-2" style="width: 35px; height: 35px;"></div>
+            <div class="bg-white p-3 rounded shadow-sm" style="max-width: 75%;">
+              <p class="mb-0">{{ selectedUser.lastMsg }}</p>
+              <small class="text-muted d-block text-end mt-1">10:30</small>
+            </div>
+          </div>
+
+          <!-- Wiadomość ode mnie -->
+          <div class="d-flex mb-3 justify-content-end">
+            <div class="bg-primary text-white p-3 rounded shadow-sm" style="max-width: 75%;">
+              <p class="mb-0">Jasne, nie ma problemu! 😉</p>
+              <small class="text-white-50 d-block text-end mt-1">10:32</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pole wpisywania (Przyklejone do dołu) -->
+        <div class="p-3 border-top bg-white d-flex align-items-center mb-5 mb-md-0">
+          <i class="bi bi-plus-circle text-primary fs-3 me-3"></i>
+          <input type="text" class="form-control rounded-pill bg-light border-0" placeholder="Napisz wiadomość...">
+          <i class="bi bi-send-fill text-primary fs-3 ms-3"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

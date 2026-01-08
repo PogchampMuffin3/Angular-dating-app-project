@@ -1,0 +1,100 @@
+<!-- GŁÓWNY KONTENER -->
+<div class="container-fluid p-0 bg-light min-vh-100">
+
+  <!-- 2. TREŚĆ GŁÓWNA (GRID) -->
+  <div class="container mt-3 pb-5 mb-5">
+    <div class="row justify-content-center">
+
+      <!-- Lewa kolumna (Desktop - Menu skrótów) -->
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="card border-0 shadow-sm p-3">
+          <div class="d-flex align-items-center mb-3">
+            <div class="bg-secondary rounded-circle" style="width: 40px; height: 40px;"></div>
+            <span class="ms-2 fw-bold">Twój Profil</span>
+          </div>
+          <hr>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-people text-primary me-2"></i> Grupy</li>
+            <li class="mb-2"><i class="bi bi-calendar-event text-danger me-2"></i> Wydarzenia</li>
+            <li><i class="bi bi-bookmark-star text-warning me-2"></i> Zapisane</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Środkowa kolumna (POSTY) -->
+      <div class="col-12 col-md-8 col-lg-6">
+
+        <!-- Dodaj nowy post -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="bg-secondary rounded-circle me-2" style="width: 40px; height: 40px;"></div>
+              <input type="text" class="form-control rounded-pill bg-light border-0" placeholder="Co słychać?">
+            </div>
+          </div>
+        </div>
+
+        <!-- Przykładowy Post 1 -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white border-0 d-flex align-items-center">
+            <div class="bg-info rounded-circle me-2" style="width: 40px; height: 40px;"></div>
+            <div>
+              <h6 class="mb-0 fw-bold">Anna Nowak</h6>
+              <small class="text-muted">2 godz. temu</small>
+            </div>
+            <i class="bi bi-three-dots ms-auto"></i>
+          </div>
+          <!-- Obrazek posta (placeholder) -->
+          <div style="height: 300px; background-color: #e9ecef;" class="d-flex align-items-center justify-content-center">
+            <span class="text-muted">Zdjęcie posta</span>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Wspaniały dzień na spacer po Warszawie! ☀️ #warszawa #randka</p>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex justify-content-between text-secondary">
+            <span><i class="bi bi-heart me-1"></i> Lubię to!</span>
+            <span><i class="bi bi-chat me-1"></i> Komentarz</span>
+            <span><i class="bi bi-share me-1"></i> Udostępnij</span>
+          </div>
+        </div>
+
+        <!-- Przykładowy Post 2 -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white border-0 d-flex align-items-center">
+            <div class="bg-warning rounded-circle me-2" style="width: 40px; height: 40px;"></div>
+            <div>
+              <h6 class="mb-0 fw-bold">Piotr Kowalski</h6>
+              <small class="text-muted">5 godz. temu</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">Szukam kogoś na wspólną kawę w ten weekend. Ktoś chętny? ☕</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Prawa kolumna (Desktop - Propozycje) -->
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="card border-0 shadow-sm p-3">
+          <h6 class="text-muted mb-3">Propozycje dla Ciebie</h6>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center">
+              <div class="bg-secondary rounded-circle me-2" style="width: 35px; height: 35px;"></div>
+              <small class="fw-bold">Marta, 24</small>
+            </div>
+            <button class="btn btn-sm btn-outline-primary rounded-pill"><i class="bi bi-person-plus"></i></button>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="bg-secondary rounded-circle me-2" style="width: 35px; height: 35px;"></div>
+              <small class="fw-bold">Tomek, 28</small>
+            </div>
+            <button class="btn btn-sm btn-outline-primary rounded-pill"><i class="bi bi-person-plus"></i></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
