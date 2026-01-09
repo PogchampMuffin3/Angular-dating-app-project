@@ -1,33 +1,77 @@
-import { Component } from '@angular/core';
-import { CommonModule} from '@angular/common';
-import { RouterLink} from '@angular/router';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Message } from '../../services/message';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-messages',
-  imports: [RouterLink, CommonModule],
+  standalone: true,
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './messages.html',
-  styles: ``,
+  styles: ``
 })
-export class Messages {
-
-  users = [
-    { id: 1, name: 'Anna Nowak', lastMsg: 'Do zobaczenia jutro! 😘', time: '10:30', avatar: 'bg-danger', active: true },
-    { id: 2, name: 'Piotr Kowalski', lastMsg: 'Jasne, pasuje mi.', time: '09:15', avatar: 'bg-warning', active: false },
-    { id: 3, name: 'Kasia Wójcik', lastMsg: 'Wysłałam Ci zdjęcie.', time: 'Wczoraj', avatar: 'bg-info', active: false },
-    { id: 4, name: 'Marek Zając', lastMsg: 'Dzięki za spotkanie!', time: 'Pn', avatar: 'bg-success', active: false }
-  ];
-
-  // Zmienna przechowująca aktualnie wybraną rozmowę
+export class Messages implements OnInit {
+  users: any[] = [];
+  messages: any[] = [];
   selectedUser: any = null;
+  newMessageText = '';
+  myId: number = 0;
 
-  // Funkcja: Wybierz użytkownika (otwiera czat)
-  selectUser(user: any) {
-    this.selectedUser = user;
+  private messageService = inject(Message);
+  private authService = inject(Auth);
+  private cdr = inject(ChangeDetectorRef);
+
+  ngOnInit() {
+    const currentUser = this.authService.getCurrentUserValue();
+    if (currentUser) {
+      this.myId = currentUser.id;
+    }
+
+    this.messageService.getConversations().subscribe({
+      next: (data) => {
+        this.users = data.filter(u => u.id !== this.myId);
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Błąd pobierania użytkowników:', err)
+    });
   }
 
-  // Funkcja: Wróć do listy (tylko dla mobile)
+  selectUser(user: any) {
+    this.selectedUser = user;
+    this.messages = [];
+    this.cdr.detectChanges();
+    this.loadChat();
+  }
+
+  loadChat() {
+    if (!this.selectedUser) return;
+
+    this.messageService.getChat(this.selectedUser.id).subscribe({
+      next: (data) => {
+        this.messages = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Błąd pobierania czatu:', err)
+    });
+  }
+
+  sendMessage() {
+    if (!this.newMessageText.trim() || !this.selectedUser) return;
+
+    this.messageService.sendMessage(this.selectedUser.id, this.newMessageText)
+      .subscribe({
+        next: (newMsg) => {
+          this.messages.push(newMsg);
+          this.newMessageText = '';
+          this.cdr.detectChanges();
+        },
+        error: (err) => console.error('Błąd wysyłania:', err)
+      });
+  }
+
   backToList() {
     this.selectedUser = null;
   }
-
 }

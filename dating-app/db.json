@@ -1,94 +1,4 @@
 {
-  "posts": [
-    {
-      "id": "1",
-      "author": "Anna Nowak",
-      "avatarColor": "bg-danger",
-      "time": "08.01.2026",
-      "content": "To jest pierwszy post z bazy danych! 🚀",
-      "likes": 5
-    },
-    {
-      "id": "3af1",
-      "author": "Twój Profil",
-      "avatarColor": "bg-primary",
-      "time": "Przed chwilą",
-      "content": "knjjnkjml",
-      "likes": 0
-    },
-    {
-      "id": "18e5",
-      "author": "Twój Profil",
-      "avatarColor": "bg-primary",
-      "time": "Przed chwilą",
-      "content": "Hii",
-      "likes": 0
-    },
-    {
-      "id": "69ff",
-      "author": "Twój Profil",
-      "avatarColor": "bg-primary",
-      "time": "Przed chwilą",
-      "content": "asd",
-      "likes": 0
-    },
-    {
-      "id": "7ffe",
-      "author": "Gosc",
-      "avatarColor": "bg-secondary",
-      "time": "Przed chwilą",
-      "content": "test",
-      "likes": 0
-    },
-    {
-      "id": "39c0",
-      "author": "Gosc",
-      "avatarColor": "bg-secondary",
-      "time": "Przed chwilą",
-      "content": "sdfsdf",
-      "likes": 0
-    },
-    {
-      "id": "50e6",
-      "author": "Jan Kowalski",
-      "avatarColor": "bg-primary",
-      "time": "Przed chwilą",
-      "content": "TEST",
-      "likes": 0
-    },
-    {
-      "id": 1767907989366,
-      "author": "Jan Kowalski",
-      "avatarColor": "bg-primary",
-      "time": "Przed chwilą",
-      "content": "TESTT",
-      "likes": 0
-    },
-    {
-      "id": 1767908004099,
-      "author": "Anna Nowak",
-      "avatarColor": "bg-danger",
-      "time": "Przed chwilą",
-      "content": "TEST",
-      "likes": 0
-    },
-    {
-      "id": 1767914619867,
-      "author": "Anna Nowak",
-      "avatarColor": "bg-danger",
-      "time": "Przed chwilą",
-      "content": "test",
-      "likes": 0
-    },
-    {
-      "id": 1767915921254,
-      "author": "Jakub Rosa",
-      "avatarColor": "bg-secondary",
-      "time": "Przed chwilą",
-      "content": "Test",
-      "likes": 0
-    }
-  ],
   "users": [
     {
       "id": 1,
@@ -105,11 +15,44 @@
       "avatarColor": "bg-danger"
     },
     {
-      "id": 1767915917886,
-      "email": "jakubrosa@gmail.com",
-      "password": "abc123",
+      "id": 3,
+      "email": "jakub@test.pl",
+      "password": "123",
       "name": "Jakub Rosa",
       "avatarColor": "bg-secondary"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1767920026497,
+      "author": "Jakub Rosa",
+      "avatarColor": "bg-secondary",
+      "time": "Przed chwilą",
+      "content": "asd",
+      "likes": 0
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "fromId": 1,
+      "toId": 2,
+      "content": "Cześć Anna! To testowa wiadomość.",
+      "time": "10:00"
+    },
+    {
+      "id": 2,
+      "fromId": 2,
+      "toId": 1,
+      "content": "Hej Jan! Działa super.",
+      "time": "10:05"
+    },
+    {
+      "id": 1767920667462,
+      "fromId": 3,
+      "toId": 1,
+      "content": "Test",
+      "time": "02:04"
     }
   ]
 }
