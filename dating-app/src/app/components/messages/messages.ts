@@ -32,6 +32,11 @@ export class Messages implements OnInit {
     this.messageService.getConversations().subscribe({
       next: (data) => {
         this.users = data.filter(u => u.id !== this.myId);
+        
+        if (this.users.length > 0 && !this.selectedUser) {
+          this.selectUser(this.users[0]);
+        }
+
         this.cdr.detectChanges();
       },
       error: (err) => console.error('Błąd pobierania użytkowników:', err)
