@@ -29,7 +29,33 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "asd",
-      "likes": 0
+      "likes": 1,
+      "likedBy": [
+        3
+      ]
+    },
+    {
+      "id": 1768849307185,
+      "author": "Anna Nowak",
+      "avatarColor": "bg-danger",
+      "time": "Przed chwilą",
+      "content": "LOL",
+      "likes": 2,
+      "likedBy": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 1768849312572,
+      "author": "Anna Nowak",
+      "avatarColor": "bg-danger",
+      "time": "Przed chwilą",
+      "content": "KEK",
+      "likes": 1,
+      "likedBy": [
+        2
+      ]
     }
   ],
   "messages": [

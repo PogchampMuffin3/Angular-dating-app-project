@@ -172,6 +172,40 @@ app.post('/messages', verifyToken, (req, res) => {
 });
 
 
+// 4. Endpoint: Toggle Like
+app.post('/posts/:id/like', verifyToken, (req, res) => {
+  try {
+    const db = readDb();
+    const postId = req.params.id;
+    const token = req.headers['authorization'].split(' ')[1];
+    const myId = jwt.verify(token, SECRET_KEY).id;
+    const post = db.posts.find(p => p.id == postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post nie znaleziony" });
+    }
+
+    if (!post.likedBy) {
+      post.likedBy = [];
+    }
+
+    const index = post.likedBy.indexOf(myId);
+
+    if (index === -1) {
+      post.likedBy.push(myId);
+    } else {
+      post.likedBy.splice(index, 1);
+    }
+    post.likes = post.likedBy.length;
+    writeDb(db);
+    res.json(post);
+  } catch (e) {
+    console.error("Błąd polubienia:", e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+
 
 app.get('/users', (req, res) => res.json(readDb().users));
 app.get('/conversations', (req, res) => res.json(readDb().conversations || []));
