@@ -29,10 +29,8 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "asd",
-      "likes": 1,
-      "likedBy": [
-        3
-      ]
+      "likes": 0,
+      "likedBy": []
     },
     {
       "id": 1768849307185,
@@ -40,10 +38,9 @@
       "avatarColor": "bg-danger",
       "time": "Przed chwilą",
       "content": "LOL",
-      "likes": 2,
+      "likes": 1,
       "likedBy": [
-        2,
-        3
+        2
       ]
     },
     {
@@ -52,9 +49,10 @@
       "avatarColor": "bg-danger",
       "time": "Przed chwilą",
       "content": "KEK",
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        2
+        2,
+        3
       ]
     }
   ],
