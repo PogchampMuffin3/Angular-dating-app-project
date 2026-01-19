@@ -64,6 +64,17 @@
       "content": "csa",
       "likes": 0,
       "likedBy": []
+    },
+    {
+      "id": 1768852095068,
+      "author": "Jakub Rosa",
+      "avatarColor": "bg-secondary",
+      "time": "Przed chwilą",
+      "content": "test",
+      "likes": 1,
+      "likedBy": [
+        3
+      ]
     }
   ],
   "messages": [
