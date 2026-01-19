@@ -29,10 +29,8 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "asd",
-      "likes": 1,
-      "likedBy": [
-        3
-      ]
+      "likes": 0,
+      "likedBy": []
     },
     {
       "id": 1768849307185,
@@ -64,10 +62,8 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "csa",
-      "likes": 1,
-      "likedBy": [
-        3
-      ]
+      "likes": 0,
+      "likedBy": []
     }
   ],
   "messages": [

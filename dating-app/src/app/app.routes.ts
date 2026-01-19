@@ -7,20 +7,21 @@ import { Profile } from './components/profile/profile';
 import { Layout } from './components/layout/layout';
 import { Events } from './components/events/events';
 import { Register } from './components/register/register';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', component : Login },
-
+  { path: 'register', component: Register },
   {
     path: '',
     component: Layout,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
       { path: 'feed', component: Feed },
       { path: 'messages', component: Messages },
       { path: 'profile', component: Profile },
-      { path: 'events', component: Events },
-      { path: 'register', component: Register }
+      { path: 'events', component: Events }
     ]
   },
 
