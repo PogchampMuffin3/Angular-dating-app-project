@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import {HttpClient, HttpRequest} from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 export class Auth {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/users';
+  private router = inject(Router);
 
   private currentUserSubject = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUserSubject.asObservable();
@@ -24,6 +26,13 @@ export class Auth {
           }
       })
     );
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.currentUserSubject.next(null);
+    this.router.navigate(['/login']);
   }
 
   register(name: string, email: string, pass: string) {
@@ -43,11 +52,6 @@ export class Auth {
     if(savedUser){
       this.currentUserSubject.next(JSON.parse((savedUser)));
     }
-  }
-
-  logout(){
-    this.currentUserSubject.next(null);
-    localStorage.removeItem('user');
   }
 
   getCurrentUserValue(){
