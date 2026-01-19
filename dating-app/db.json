@@ -20,6 +20,13 @@
       "password": "123",
       "name": "Jakub Rosa",
       "avatarColor": "bg-secondary"
+    },
+    {
+      "id": 1768852338626,
+      "email": "mail",
+      "password": "123",
+      "name": "Jakub Rosa v2",
+      "avatarColor": "bg-secondary"
     }
   ],
   "posts": [
@@ -75,6 +82,17 @@
       "likedBy": [
         3
       ]
+    },
+    {
+      "id": 1768852342138,
+      "author": "Jakub Rosa v2",
+      "avatarColor": "bg-secondary",
+      "time": "Przed chwilą",
+      "content": "hej",
+      "likes": 1,
+      "likedBy": [
+        1768852338626
+      ]
     }
   ],
   "messages": [
@@ -105,6 +123,13 @@
       "toId": 1,
       "content": "asdsad",
       "time": "20:37"
+    },
+    {
+      "id": 1768852298571,
+      "fromId": 3,
+      "toId": 1,
+      "content": "adsdas",
+      "time": "20:51"
     }
   ]
 }
