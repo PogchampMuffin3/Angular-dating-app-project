@@ -60,20 +60,32 @@
           </div>
 
           <!-- Stopka posta (lajki i przyciski) -->
-          <div class="card-footer bg-white border-0 d-flex justify-content-between text-secondary">
-            <button class="btn btn-sm btn-light text-secondary w-100">
-              <i class="bi bi-heart me-1"></i> {{ post.likes || 0 }}
+          <div class="card-footer bg-white border-0 d-flex justify-content-between">
+
+            <!-- PRZYCISK POLUBIENIA (ZMIENIONY) -->
+            <button class="btn btn-sm w-100 d-flex align-items-center justify-content-center"
+                    [class.text-danger]="isLikedByMe(post)"
+                    [class.text-secondary]="!isLikedByMe(post)"
+                    (click)="likePost(post)">
+              <i class="bi me-1"
+                 [class.bi-heart-fill]="isLikedByMe(post)"
+                 [class.bi-heart]="!isLikedByMe(post)">
+              </i>
+              <span class="fw-bold">{{ post.likes || 0 }}</span>
             </button>
+
             <button class="btn btn-sm btn-light text-secondary w-100">
               <i class="bi bi-chat me-1"></i> Komentarz
             </button>
+
             <button class="btn btn-sm btn-light text-secondary w-100">
               <i class="bi bi-share me-1"></i> Udostępnij
             </button>
           </div>
         </div>
 
-      </div>
+
+        </div>
 
       <!-- Prawa kolumna (Desktop - Propozycje) -->
       <div class="col-lg-3 d-none d-lg-block">

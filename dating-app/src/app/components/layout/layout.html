@@ -17,12 +17,12 @@
     </div>
 
     <!-- Menu -->
-    <div class="d-flex gap-4 fs-4 text-secondary">
+    <div class="d-flex gap-4 fs-4 text-secondary align-items-center"> <!-- dodałem align-items-center -->
       <a routerLink="/feed" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
         <i class="bi bi-house-door-fill"></i>
       </a>
       <a routerLink="/events" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
-        <i class="bi bi-calendar-event-fill"></i> <!-- Nowa ikona -->
+        <i class="bi bi-calendar-event-fill"></i>
       </a>
       <a routerLink="/messages" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
         <i class="bi bi-chat-dots-fill"></i>
@@ -30,6 +30,11 @@
       <a routerLink="/profile" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
         <i class="bi bi-person-circle"></i>
       </a>
+
+      <!-- PRZYCISK WYLOGOWANIA (NOWY) -->
+      <button (click)="authService.logout()" class="btn text-secondary fs-4 p-0 border-0 bg-transparent" title="Wyloguj">
+        <i class="bi bi-box-arrow-right text-danger"></i>
+      </button>
     </div>
   </nav>
 

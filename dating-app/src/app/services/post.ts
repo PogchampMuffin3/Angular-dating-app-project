@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Auth } from '../services/auth';
 
@@ -9,12 +9,20 @@ import { Auth } from '../services/auth';
 export class PostService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/posts';
+  private authService = inject(Auth);
 
-  getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  private getHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
   }
 
-  private authService = inject(Auth);
+  getPosts(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl, this.getHeaders());
+  }
 
   addPost(content: string): Observable<any> {
     const currentUser = this.authService.getCurrentUserValue();
@@ -26,8 +34,13 @@ export class PostService {
       avatarColor: authorAvater,
       time: 'Przed chwilą',
       content: content,
-      likes: 0
+      likes: 0,
+      likedBy: []
     };
-    return this.http.post(this.apiUrl, newPost);
+    return this.http.post(this.apiUrl, newPost, this.getHeaders());
+  }
+
+  toggleLike(postId: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${postId}/like`, {}, this.getHeaders());
   }
 }

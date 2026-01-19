@@ -29,7 +29,45 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "asd",
-      "likes": 0
+      "likes": 1,
+      "likedBy": [
+        3
+      ]
+    },
+    {
+      "id": 1768849307185,
+      "author": "Anna Nowak",
+      "avatarColor": "bg-danger",
+      "time": "Przed chwilą",
+      "content": "LOL",
+      "likes": 2,
+      "likedBy": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 1768849312572,
+      "author": "Anna Nowak",
+      "avatarColor": "bg-danger",
+      "time": "Przed chwilą",
+      "content": "KEK",
+      "likes": 2,
+      "likedBy": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 1768851039808,
+      "author": "Gosc",
+      "avatarColor": "bg-secondary",
+      "time": "Przed chwilą",
+      "content": "csa",
+      "likes": 1,
+      "likedBy": [
+        3
+      ]
     }
   ],
   "messages": [
@@ -53,6 +91,13 @@
       "toId": 1,
       "content": "Test",
       "time": "02:04"
+    },
+    {
+      "id": 1768851434543,
+      "fromId": 3,
+      "toId": 1,
+      "content": "asdsad",
+      "time": "20:37"
     }
   ]
 }

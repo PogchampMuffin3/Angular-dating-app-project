@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-layout',
@@ -8,5 +9,5 @@ import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
   styles: ``,
 })
 export class Layout {
-
+  public authService = inject(Auth);
 }
