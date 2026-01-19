@@ -63,7 +63,7 @@
           <div class="card-footer bg-white border-0 d-flex justify-content-between">
 
             <!-- PRZYCISK POLUBIENIA (ZMIENIONY) -->
-            <button class="btn btn-sm w-100 d-flex align-items-center justify-content-center"
+            <button class="btn btn-sm btn-light w-100 d-flex align-items-center justify-content-center me-1"
                     [class.text-danger]="isLikedByMe(post)"
                     [class.text-secondary]="!isLikedByMe(post)"
                     (click)="likePost(post)">
@@ -74,7 +74,8 @@
               <span class="fw-bold">{{ post.likes || 0 }}</span>
             </button>
 
-            <button class="btn btn-sm btn-light text-secondary w-100">
+            <!-- Reszta przycisków bez zmian -->
+            <button class="btn btn-sm btn-light text-secondary w-100 me-1">
               <i class="bi bi-chat me-1"></i> Komentarz
             </button>
 
