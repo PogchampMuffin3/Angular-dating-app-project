@@ -29,8 +29,10 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "asd",
-      "likes": 0,
-      "likedBy": []
+      "likes": 1,
+      "likedBy": [
+        3
+      ]
     },
     {
       "id": 1768849307185,
@@ -38,9 +40,10 @@
       "avatarColor": "bg-danger",
       "time": "Przed chwilą",
       "content": "LOL",
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        2
+        2,
+        3
       ]
     },
     {
@@ -61,8 +64,10 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "csa",
-      "likes": 0,
-      "likedBy": []
+      "likes": 1,
+      "likedBy": [
+        3
+      ]
     }
   ],
   "messages": [
@@ -86,6 +91,13 @@
       "toId": 1,
       "content": "Test",
       "time": "02:04"
+    },
+    {
+      "id": 1768851434543,
+      "fromId": 3,
+      "toId": 1,
+      "content": "asdsad",
+      "time": "20:37"
     }
   ]
 }
