@@ -14,7 +14,8 @@ import { filter, Subscription } from 'rxjs';
 export class Layout implements OnInit, OnDestroy {
   public authService = inject(Auth);
   private router = inject(Router);
-  
+  public currentUser: any = null;
+
   // Zmienna sterująca widocznością prawego panelu
   showRightSidebar = true;
   private routerSub?: Subscription;
@@ -29,6 +30,7 @@ export class Layout implements OnInit, OnDestroy {
     ).subscribe((event: any) => {
       this.checkSidebar(event.url);
     });
+    this.currentUser = this.authService.getCurrentUserValue();
   }
 
   ngOnDestroy() {
