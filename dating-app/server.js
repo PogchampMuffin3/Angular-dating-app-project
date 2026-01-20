@@ -34,6 +34,7 @@ function verifyToken(req, res, next) {
   next();
 }
 
+// Endpoint: Logowanie
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   const db = readDb();
@@ -50,6 +51,8 @@ app.post('/login', (req, res) => {
   }
 });
 
+
+// Endpoint: Rejestracja
 app.post('/register', (req, res) => {
   const { email, password, name } = req.body;
   const db = readDb();
@@ -89,7 +92,7 @@ app.post('/posts', verifyToken, (req, res) => {
 
 
 
-// Endpoint: Pobierz listę użytkowników (do listy kontaktów)
+// Endpoint: Pobierz listę użytkowników
 app.get('/users', verifyToken, (req, res) => {
   const db = readDb();
   // Zwracamy wszystkich oprócz nas samych
@@ -143,36 +146,32 @@ app.post('/messages', verifyToken, (req, res) => {
 });
 
 
-// Endpoint: Toggle Like
+// Endpoint: Polub post
 app.post('/posts/:id/like', verifyToken, (req, res) => {
-  try {
-    const db = readDb();
-    const postId = req.params.id;
-    const token = req.headers['authorization'].split(' ')[1];
-    const myId = jwt.verify(token, SECRET_KEY).id;
-    const post = db.posts.find(p => p.id == postId);
-    if (!post) {
-      return res.status(404).json({ message: "Post nie znaleziony" });
-    }
-
-    if (!post.likedBy) {
-      post.likedBy = [];
-    }
-
-    const index = post.likedBy.indexOf(myId);
-
-    if (index === -1) {
-      post.likedBy.push(myId);
-    } else {
-      post.likedBy.splice(index, 1);
-    }
-    post.likes = post.likedBy.length;
-    writeDb(db);
-    res.json(post);
-  } catch (e) {
-    console.error("Błąd polubienia:", e);
-    res.status(500).json({ error: e.message });
+  const db = readDb();
+  const postId = req.params.id;
+  const token = req.headers['authorization'].split(' ')[1];
+  const myId = jwt.verify(token, SECRET_KEY).id;
+  const post = db.posts.find(p => p.id == postId);
+  if (!post) {
+    return res.status(404).json({ message: "Post nie znaleziony" });
   }
+
+  if (!post.likedBy) {
+    post.likedBy = [];
+  }
+
+  const index = post.likedBy.indexOf(myId);
+
+  if (index === -1) {
+    post.likedBy.push(myId);
+  } else {
+    post.likedBy.splice(index, 1);
+  }
+  post.likes = post.likedBy.length;
+
+  writeDb(db);
+  res.json(post);
 });
 
 
