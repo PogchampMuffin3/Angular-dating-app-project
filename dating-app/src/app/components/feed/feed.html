@@ -2,14 +2,19 @@
 
 <div class="mx-auto" style="max-width: 680px;">
 
-  <!-- SEKCJA DODAWANIA POSTA (Zmiana: input i przycisk w jednej linii) -->
+  <!-- DODAWANIE POSTA -->
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
       <div class="d-flex align-items-center gap-2">
-        <!-- Awatar -->
-        <div class="bg-secondary rounded-circle flex-shrink-0" style="width: 40px; height: 40px;"></div>
+        <!-- ZMIANA: Dynamiczny kolor awatara -->
+        <div 
+          class="rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center text-white fw-bold"
+          [ngClass]="authService.getCurrentUserValue()?.avatarColor || 'bg-secondary'"
+          style="width: 40px; height: 40px;"
+        >
+          {{ authService.getCurrentUserValue()?.name?.charAt(0) || 'U' }}
+        </div>
         
-        <!-- Input -->
         <div class="flex-grow-1">
           <input 
             type="text" 
@@ -20,7 +25,6 @@
           >
         </div>
 
-        <!-- Przycisk (Teraz obok inputa) -->
         <button 
           class="btn btn-primary px-4 rounded-pill fw-bold" 
           [disabled]="!newPostContent.trim()"
@@ -32,15 +36,22 @@
     </div>
   </div>
 
-  <!-- Lista postów (Bez zmian) -->
+  <!-- LISTA POSTÓW -->
   <div class="d-flex flex-column gap-3">
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
         
-        <!-- Nagłówek -->
         <div class="p-3 d-flex justify-content-between align-items-start">
           <div class="d-flex gap-2">
-            <div class="bg-secondary rounded-circle" style="width: 40px; height: 40px;"></div>
+            <!-- ZMIANA: Dynamiczny awatar autora posta -->
+            <div 
+              class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
+              [ngClass]="post.avatarColor || 'bg-secondary'"
+              style="width: 40px; height: 40px;"
+            >
+              {{ post.author?.charAt(0) || '?' }}
+            </div>
+            
             <div>
               <div class="fw-bold text-dark" style="font-size: 0.95rem;">
                 {{ post.author || 'Name Surname' }}
@@ -55,12 +66,10 @@
           </button>
         </div>
 
-        <!-- Treść -->
         <div class="px-3 pb-2">
           <p class="card-text text-dark mb-2">{{ post.content }}</p>
         </div>
 
-        <!-- Liczniki -->
         <div class="px-3 py-2 d-flex justify-content-between align-items-center text-secondary small border-bottom">
           <div class="d-flex align-items-center gap-1">
             <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 18px; height: 18px;">
@@ -73,7 +82,6 @@
           </div>
         </div>
 
-        <!-- Akcje -->
         <div class="px-2 py-1">
           <div class="d-flex justify-content-between">
             <button 

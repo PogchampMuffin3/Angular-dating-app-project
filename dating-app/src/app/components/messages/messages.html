@@ -1,7 +1,6 @@
 <!-- messages.html -->
 
 <style>
-  /* Wymuszenie szerokości sidebara */
   .chat-sidebar {
     width: 100%;
   }
@@ -11,7 +10,6 @@
       min-width: 320px !important;
       border-left: 1px solid #dee2e6;
     }
-    /* Na desktopie sidebar zawsze widoczny jako flex */
     .desktop-visible {
       display: flex !important;
     }
@@ -20,25 +18,26 @@
 
 <div class="messages-container d-flex h-100 w-100 position-relative">
 
-  <!-- =========================================================================
-       SEKCJA 1: CZAT (Lewa strona / Środek)
-       ========================================================================= -->
-  <section
+  <!-- CZAT -->
+  <section 
     class="flex-column flex-grow-1 bg-white desktop-visible"
-    [class.d-flex]="selectedUser"
+    [class.d-flex]="selectedUser" 
     [class.d-none]="!selectedUser"
     style="min-width: 0;"
   >
 
-    <!-- HEADER CZATU -->
+    <!-- HEADER -->
     <div *ngIf="selectedUser" class="p-3 border-bottom d-flex align-items-center gap-3 bg-white" style="height: 72px;">
-      <!-- Back button (tylko mobile) -->
       <button (click)="selectedUser = null" class="btn btn-link text-dark p-0 d-md-none me-2">
         <i class="bi bi-arrow-left fs-4"></i>
       </button>
 
-      <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center fw-bold"
-           style="width: 42px; height: 42px;">
+      <!-- ZMIANA: Awatar w nagłówku rozmowy -->
+      <div 
+        class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold"
+        [ngClass]="selectedUser.avatarColor || 'bg-secondary'"
+        style="width: 42px; height: 42px;"
+      >
         {{ selectedUser.name?.charAt(0) || 'U' }}
       </div>
 
@@ -50,14 +49,13 @@
       </div>
     </div>
 
-    <!-- Empty State nagłówka (Tylko Desktop) -->
     <div *ngIf="!selectedUser" class="p-3 border-bottom d-none d-md-flex align-items-center bg-white" style="height: 72px;">
        <span class="fw-bold text-secondary">Select a chat</span>
     </div>
 
-    <!-- OBSZAR WIADOMOŚCI -->
+    <!-- WIADOMOŚCI -->
     <div class="flex-grow-1 overflow-auto p-4 d-flex flex-column" style="background-color: #f0f2f5;">
-
+      
       <ng-container *ngIf="selectedUser; else noChatSelected">
         <div *ngFor="let msg of messages" class="d-flex mb-3"
              [ngClass]="{'justify-content-end': msg.fromId === myId, 'justify-content-start': msg.fromId !== myId}">
@@ -97,34 +95,34 @@
     </div>
   </section>
 
-  <!-- =========================================================================
-       SEKCJA 2: LISTA ROZMÓW (Prawa strona)
-       ========================================================================= -->
-  <aside
+  <!-- LISTA ROZMÓW -->
+  <aside 
     class="chat-sidebar flex-column bg-white desktop-visible"
     [class.d-flex]="!selectedUser"
     [class.d-none]="selectedUser"
   >
-
-    <!-- HEADER LISTY -->
+    
     <div class="p-3 border-bottom" style="height: 72px; display: flex; align-items: center;">
       <div class="w-100 bg-light rounded-pill px-3 py-2 d-flex align-items-center">
         <i class="bi bi-search text-secondary me-2"></i>
-        <input type="text" class="form-control border-0 bg-transparent p-0 shadow-none small"
+        <input type="text" class="form-control border-0 bg-transparent p-0 shadow-none small" 
                placeholder="Search..." />
       </div>
     </div>
 
-    <!-- LISTA UŻYTKOWNIKÓW -->
     <div class="flex-grow-1 overflow-auto">
       <div *ngFor="let user of users" class="border-bottom">
-        <button (click)="selectUser(user)"
+        <button (click)="selectUser(user)" 
                 class="w-100 border-0 bg-transparent p-3 text-start d-flex align-items-center gap-3 list-group-item-action"
                 [class.bg-light]="selectedUser?.id === user.id">
-
+          
           <div class="position-relative">
-            <div class="rounded-circle bg-light border d-flex align-items-center justify-content-center text-secondary fw-bold"
-                 style="width: 48px; height: 48px;">
+            <!-- Dynamiczny awatar na liście -->
+            <div 
+              class="rounded-circle border d-flex align-items-center justify-content-center text-white fw-bold"
+              [ngClass]="user.avatarColor || 'bg-secondary'"
+              style="width: 48px; height: 48px;"
+            >
               {{ user.name?.charAt(0) || '?' }}
             </div>
             <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle p-1"
@@ -133,10 +131,11 @@
 
           <div class="overflow-hidden">
             <div class="fw-bold text-dark text-truncate">{{ user.name }}</div>
+            <div class="small text-secondary text-truncate">Lorem ipsum dolor sit amet...</div>
           </div>
         </button>
       </div>
-
+      
       <div *ngIf="!users || users.length === 0" class="p-4 text-center text-secondary small">
         No chats available.
       </div>

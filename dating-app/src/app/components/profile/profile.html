@@ -2,7 +2,7 @@
 
 <div class="mx-auto" style="max-width: 800px;">
   
-  <!-- HEADER PROFILU (Bez zmian funkcjonalnych) -->
+  <!-- HEADER -->
   <div class="card border-0 shadow-sm mb-3 overflow-hidden">
     <div class="bg-secondary bg-gradient" style="height: 150px;"></div>
     
@@ -10,8 +10,12 @@
       <div class="d-flex flex-column flex-md-row align-items-start align-items-md-end gap-3" style="margin-top: -40px;">
         
         <div class="rounded-circle bg-white p-1">
-          <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center display-4 fw-bold"
-               style="width: 120px; height: 120px; border: 4px solid white;">
+          <!-- ZMIANA: Duży awatar z kolorem użytkownika -->
+          <div 
+            class="rounded-circle text-white d-flex align-items-center justify-content-center display-4 fw-bold"
+            [ngClass]="authService.getCurrentUserValue()?.avatarColor || 'bg-primary'"
+            style="width: 120px; height: 120px; border: 4px solid white;"
+          >
              {{ authService.getCurrentUserValue()?.name?.charAt(0) || 'U' }}
           </div>
         </div>
@@ -39,14 +43,19 @@
   </div>
 
 
-  <!-- SEKCJA DODAWANIA POSTA (Zmiana: input i przycisk w jednej linii) -->
+  <!-- DODAWANIE POSTA -->
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
       <div class="d-flex align-items-center gap-2">
-        <!-- Awatar -->
-        <div class="bg-secondary rounded-circle flex-shrink-0" style="width: 40px; height: 40px;"></div>
+        <!-- ZMIANA: Mały awatar -->
+        <div 
+          class="rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center text-white fw-bold"
+          [ngClass]="authService.getCurrentUserValue()?.avatarColor || 'bg-secondary'"
+          style="width: 40px; height: 40px;"
+        >
+          {{ authService.getCurrentUserValue()?.name?.charAt(0) || 'U' }}
+        </div>
         
-        <!-- Input -->
         <div class="flex-grow-1">
           <input 
             type="text" 
@@ -57,7 +66,6 @@
           >
         </div>
         
-        <!-- Przycisk (Obok inputa) -->
         <button 
           class="btn btn-primary px-4 rounded-pill fw-bold" 
           [disabled]="!newPostContent.trim()"
@@ -70,13 +78,21 @@
   </div>
 
 
-  <!-- LISTA POSTÓW (Bez zmian) -->
+  <!-- LISTA MOICH POSTÓW -->
   <div class="d-flex flex-column gap-3">
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
         <div class="p-3 d-flex justify-content-between align-items-start">
           <div class="d-flex gap-2">
-            <div class="bg-secondary rounded-circle" style="width: 40px; height: 40px;"></div>
+            <!-- ZMIANA: Awatar przy poście -->
+            <div 
+              class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
+              [ngClass]="post.avatarColor || 'bg-secondary'"
+              style="width: 40px; height: 40px;"
+            >
+              {{ post.author?.charAt(0) || '?' }}
+            </div>
+            
             <div>
               <div class="fw-bold text-dark">{{ post.author }}</div>
               <div class="text-secondary small">{{ post.date | date:'mediumDate' }}</div>
