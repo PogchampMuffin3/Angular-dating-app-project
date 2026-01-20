@@ -41,6 +41,13 @@
       "password": "123",
       "name": "Jakub Dąbrowski",
       "avatarColor": "bg-secondary"
+    },
+    {
+      "id": 1768939047266,
+      "email": "test",
+      "password": "123",
+      "name": "Konto Testowe",
+      "avatarColor": "bg-secondary"
     }
   ],
   "posts": [
@@ -94,10 +101,11 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "test",
-      "likes": 2,
+      "likes": 3,
       "likedBy": [
         3,
-        1
+        1,
+        1768939047266
       ]
     },
     {
@@ -106,9 +114,10 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "hej",
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        1768852338626
+        1768852338626,
+        1768939047266
       ]
     },
     {
@@ -117,8 +126,10 @@
       "avatarColor": "bg-primary",
       "time": "Przed chwilą",
       "content": "Wpis testowy.",
-      "likes": 0,
-      "likedBy": []
+      "likes": 1,
+      "likedBy": [
+        1768939047266
+      ]
     },
     {
       "id": 1768904018915,
@@ -126,8 +137,10 @@
       "avatarColor": "bg-primary",
       "time": "Przed chwilą",
       "content": "Wpis testowy",
-      "likes": 0,
-      "likedBy": []
+      "likes": 1,
+      "likedBy": [
+        1768939047266
+      ]
     },
     {
       "id": 1768904037438,
@@ -144,8 +157,10 @@
       "avatarColor": "bg-primary",
       "time": "Przed chwilą",
       "content": "Co słychać u was?",
-      "likes": 0,
-      "likedBy": []
+      "likes": 1,
+      "likedBy": [
+        1768939047266
+      ]
     }
   ],
   "messages": [
@@ -197,6 +212,13 @@
       "toId": 1,
       "content": "Lol",
       "time": "20:09"
+    },
+    {
+      "id": 1768939310143,
+      "fromId": 1768939047266,
+      "toId": 1768937488470,
+      "content": "Test",
+      "time": "21:01"
     }
   ]
 }

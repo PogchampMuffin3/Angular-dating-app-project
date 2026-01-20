@@ -14,7 +14,8 @@ const DB_FILE = './db.json';
 
 
 function readDb() {
-  return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+  const data = fs.readFileSync(DB_FILE, 'utf8');
+  return JSON.parse(data);
 }
 
 function writeDb(data) {
@@ -37,13 +38,13 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
   const db = readDb();
 
+  // Szukamy użytkownika
   const user = db.users.find(u => u.email === email && u.password === password);
 
   if (user) {
+    // Tworzymy token
     const token = jwt.sign({ id: user.id, email: user.email, name: user.name }, SECRET_KEY, { expiresIn: '1h' });
-    console.log(`Zalogowano: ${user.name}`);
-    const { password, ...userWithoutPass } = user;
-    res.json({ token, user: userWithoutPass });
+    res.json({ token, user });
   } else {
     res.status(401).json({ message: 'Błędny email lub hasło' });
   }
@@ -88,61 +89,31 @@ app.post('/posts', verifyToken, (req, res) => {
 
 
 
-// 1. Endpoint: Pobierz listę użytkowników (do listy kontaktów)
+// Endpoint: Pobierz listę użytkowników (do listy kontaktów)
 app.get('/users', verifyToken, (req, res) => {
   const db = readDb();
-  // Zwracamy wszystkich oprócz nas samych (nie chcemy pisać do siebie)
+  // Zwracamy wszystkich oprócz nas samych
   res.json(db.users);
 });
 
 app.get('/messages/:friendId', verifyToken, (req, res) => {
-  try {
-    console.log("--- START /messages/:friendId ---");
-    const db = readDb();
+  const db = readDb();
+  const friendId = parseInt(req.params.friendId);
 
-    // Zabezpieczenie level MAX: jeśli cokolwiek jest nie tak z bazą, zwróć pustą tablicę
-    if (!db || !db.messages || !Array.isArray(db.messages)) {
-      console.warn("Baza uszkodzona lub brak messages. Zwracam [].");
-      return res.json([]);
-    }
+  const token = req.headers['authorization'].split(' ')[1];
+  const myId = jwt.verify(token, SECRET_KEY).id;
 
-    const friendId = parseInt(req.params.friendId);
+  // Filtrowanie
+  const chat = db.messages.filter(m =>
+    (m.fromId === myId && m.toId === friendId) ||
+    (m.fromId === friendId && m.toId === myId)
+  );
 
-    // Wyciągnij ID z tokena
-    const authHeader = req.headers['authorization'];
-    if (!authHeader) return res.json([]); // Brak tokena? Pusta lista.
-
-    const tokenParts = authHeader.split(' ');
-    if (tokenParts.length !== 2) return res.json([]); // Zły format? Pusta lista.
-
-    const token = tokenParts[1];
-    let myId;
-    try {
-      const decoded = jwt.verify(token, SECRET_KEY);
-      myId = decoded.id;
-    } catch (err) {
-      console.error("Błąd weryfikacji tokena:", err.message);
-      return res.json([]); // Token nieważny? Pusta lista.
-    }
-
-    // Filtrowanie
-    const chat = db.messages.filter(m =>
-      (m.fromId === myId && m.toId === friendId) ||
-      (m.fromId === friendId && m.toId === myId)
-    );
-
-    console.log(`Znaleziono ${chat.length} wiadomości.`);
-    res.json(chat);
-
-  } catch (e) {
-    // Jeśli nawet to zawiedzie, nie rzucaj 500, tylko zwróć [] i zaloguj błąd
-    console.error("Krytyczny błąd w endpointcie (zignorowany):", e);
-    res.json([]);
-  }
+  res.json(chat);
 });
 
 
-// 3. Endpoint: Wyślij wiadomość
+// Endpoint: Wyślij wiadomość
 app.post('/messages', verifyToken, (req, res) => {
   try {
     const db = readDb();
@@ -172,7 +143,7 @@ app.post('/messages', verifyToken, (req, res) => {
 });
 
 
-// 4. Endpoint: Toggle Like
+// Endpoint: Toggle Like
 app.post('/posts/:id/like', verifyToken, (req, res) => {
   try {
     const db = readDb();
@@ -214,10 +185,10 @@ app.get('/users/:id', (req, res) => {
   try {
     const db = readDb(); // <--- TEGO BRAKOWAŁO!
     const userId = req.params.id; // Pobieramy jako string
-    
+
     // Szukamy używając == (miękkie porównanie: "3" == 3)
     const user = db.users.find(u => u.id == userId);
-    
+
     if (user) {
       // Usuwamy hasło przed wysłaniem
       const { password, ...safeUser } = user;

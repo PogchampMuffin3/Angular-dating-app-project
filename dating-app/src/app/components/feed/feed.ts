@@ -21,11 +21,12 @@ export class Feed implements OnInit {
   public authService = inject(Auth);
 
   ngOnInit() {
+    // 1. Sprawdzamy kim jesteśmy
     const user = this.authService.getCurrentUserValue();
     if (user) {
       this.myId = user.id;
     }
-
+    // 2. Ładujemy posty
     this.loadPosts();
   }
 

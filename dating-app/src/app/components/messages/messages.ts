@@ -24,18 +24,17 @@ export class Messages implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
+    // Pobieramy swoje ID
     const currentUser = this.authService.getCurrentUserValue();
     if (currentUser) {
       this.myId = currentUser.id;
     }
 
+    // Pobieramy listę znajomych do czatu
     this.messageService.getConversations().subscribe({
       next: (data) => {
+        // Usuwamy siebie z listy
         this.users = data.filter(u => u.id !== this.myId);
-        if (this.users.length > 0 && !this.selectedUser) {
-          this.selectUser(this.users[0]);
-        }
-
         this.cdr.detectChanges();
       },
       error: (err) => console.error('Błąd pobierania użytkowników:', err)
@@ -56,8 +55,7 @@ export class Messages implements OnInit {
       next: (data) => {
         this.messages = data;
         this.cdr.detectChanges();
-      },
-      error: (err) => console.error('Błąd pobierania czatu:', err)
+      }
     });
   }
 
