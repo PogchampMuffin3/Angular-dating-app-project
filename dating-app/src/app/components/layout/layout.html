@@ -30,7 +30,9 @@
 
       <!-- Prawa strona -->
       <div class="d-none d-md-flex align-items-center gap-3">
-        <span class="small fw-semibold text-secondary">Name Surname</span>
+        <div class="ms-3">
+          <h6 class="mb-0 fw-bold">{{ currentUser?.name || 'Użytkownik' }}</h6>
+        </div>
         <button
           (click)="authService.logout()"
           class="btn p-0 border-0 bg-transparent"
