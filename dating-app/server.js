@@ -210,6 +210,28 @@ app.post('/posts/:id/like', verifyToken, (req, res) => {
 app.get('/users', (req, res) => res.json(readDb().users));
 app.get('/conversations', (req, res) => res.json(readDb().conversations || []));
 
+app.get('/users/:id', (req, res) => {
+  try {
+    const db = readDb(); // <--- TEGO BRAKOWAŁO!
+    const userId = req.params.id; // Pobieramy jako string
+    
+    // Szukamy używając == (miękkie porównanie: "3" == 3)
+    const user = db.users.find(u => u.id == userId);
+    
+    if (user) {
+      // Usuwamy hasło przed wysłaniem
+      const { password, ...safeUser } = user;
+      res.json(safeUser);
+    } else {
+      console.log(`[404] Nie znaleziono użytkownika o ID: ${userId}`);
+      res.status(404).json({ message: 'Użytkownik nie istnieje' });
+    }
+  } catch (e) {
+    console.error("Błąd serwera przy pobieraniu usera:", e);
+    res.status(500).json({ error: "Błąd serwera" });
+  }
+});
+
 app.listen(3000, () => {
   console.log('Serwer działa na porcie 3000');
 });

@@ -93,6 +93,15 @@
       "likedBy": [
         1768852338626
       ]
+    },
+    {
+      "id": 1768894004175,
+      "author": "Jan Kowalski",
+      "avatarColor": "bg-primary",
+      "time": "Przed chwilą",
+      "content": "Wpis testowy.",
+      "likes": 0,
+      "likedBy": []
     }
   ],
   "messages": [
