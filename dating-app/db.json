@@ -176,6 +176,13 @@
       "toId": 1768852338626,
       "content": "Cześć to wiadomość testowa!",
       "time": "12:11"
+    },
+    {
+      "id": 1768936142114,
+      "fromId": 3,
+      "toId": 1,
+      "content": "Lol",
+      "time": "20:09"
     }
   ]
 }

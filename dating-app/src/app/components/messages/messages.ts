@@ -4,8 +4,6 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Message } from '../../services/message';
 import { Auth } from '../../services/auth';
-import { forkJoin, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-messages',
@@ -34,7 +32,6 @@ export class Messages implements OnInit {
     this.messageService.getConversations().subscribe({
       next: (data) => {
         this.users = data.filter(u => u.id !== this.myId);
-        this.loadLastMessages();
         if (this.users.length > 0 && !this.selectedUser) {
           this.selectUser(this.users[0]);
         }
@@ -42,33 +39,6 @@ export class Messages implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => console.error('Błąd pobierania użytkowników:', err)
-    });
-  }
-
-  loadLastMessages() {
-    const requests = this.users.map(user =>
-      this.messageService.getChat(user.id).pipe(
-        map(chat => {
-          const last = chat && chat.length > 0 ? chat[chat.length - 1] : null;
-          return {
-            userId: user.id,
-            lastMsg: last ? last.content : '',
-            lastTime: last ? last.time : ''
-          };
-        })
-      )
-    );
-
-    forkJoin(requests).subscribe(results => {
-      results.forEach(res => {
-        const user = this.users.find(u => u.id === res.userId);
-        if (user) {
-          user.lastMsg = res.lastMsg;
-          user.lastTime = res.lastTime;
-        }
-      });
-
-      this.cdr.detectChanges();
     });
   }
 
@@ -93,7 +63,6 @@ export class Messages implements OnInit {
 
   sendMessage() {
     if (!this.newMessageText.trim() || !this.selectedUser) return;
-
     this.messageService.sendMessage(this.selectedUser.id, this.newMessageText)
       .subscribe({
         next: (newMsg) => {
