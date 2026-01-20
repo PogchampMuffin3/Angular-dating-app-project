@@ -17,31 +17,34 @@ export class Register {
     email: '',
     password: ''
   };
-  errorMessage = '';
+
+  // ZMIANA: Boolean zamiast String (jak w Login)
+  registerError = false;
 
   private authService = inject(Auth);
   private router = inject(Router);
 
   onRegister() {
-    // Prosta walidacja: czy wszystko wypełnione?
-    if (!this.registerData.firstName || !this.registerData.lastName || !this.registerData.email || !this.registerData.password) {
-      this.errorMessage = 'Wypełnij wszystkie pola!';
+    this.registerError = false;
+
+    // Walidacja: czy pola są puste?
+    if (!this.registerData.firstName || !this.registerData.lastName || 
+        !this.registerData.email || !this.registerData.password) {
+      this.registerError = true;
       return;
     }
 
-    // Łączymy imię i nazwisko w jedną nazwę (dla uproszczenia bazy)
     const fullName = `${this.registerData.firstName} ${this.registerData.lastName}`;
 
-    // Wywołujemy rejestrację w serwisie
     this.authService.register(fullName, this.registerData.email, this.registerData.password)
       .subscribe({
         next: () => {
           console.log('Zarejestrowano pomyślnie!');
-          this.router.navigate(['/feed']); // Przekieruj do aplikacji
+          this.router.navigate(['/feed']);
         },
         error: (err) => {
           console.error(err);
-          this.errorMessage = 'Błąd rejestracji (może taki email już istnieje?)';
+          this.registerError = true; // Pokaż błąd w razie problemów z serwerem
         }
       });
   }
