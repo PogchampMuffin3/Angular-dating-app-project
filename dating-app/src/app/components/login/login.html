@@ -4,7 +4,7 @@
   <div class="card border-0 shadow-sm p-4" style="max-width: 400px; width: 100%;">
     <div class="card-body text-center">
       
-      <!-- Nagłówek: tylko tekst SocialApp -->
+      <!-- Nagłówek -->
       <div class="mb-5">
         <h1 class="fw-bold text-primary mb-0" style="font-size: 2.5rem; letter-spacing: -1px;">
           SocialApp
@@ -20,6 +20,7 @@
             placeholder="Email"
             [(ngModel)]="email"
             name="email"
+            (input)="loginError = false"
           >
         </div>
         
@@ -30,10 +31,16 @@
             placeholder="Password"
             [(ngModel)]="password"
             name="password"
+            (input)="loginError = false"
           >
         </div>
+
+        <!-- KOMUNIKAT BŁĘDU -->
+        <!-- Używam zwykłego stylu text-danger, który na pewno zadziała -->
+        <div *ngIf="loginError" class="mb-3 text-danger fw-bold small">
+           Wrong email or password
+        </div>
         
-        <!-- ZMIANA: (click)="onLogin()" zamiast login() -->
         <button 
           type="button" 
           (click)="onLogin()" 
@@ -42,9 +49,10 @@
           Sign In
         </button>
         
-        <div class="d-flex justify-content-between small mt-4">
-          <a routerLink="/register" class="text-decoration-none text-secondary fw-semibold">Create account</a>
-          <a href="#" class="text-decoration-none text-secondary">Forgot password?</a>
+        <div class="mt-4 text-center">
+          <a routerLink="/register" class="text-decoration-none text-secondary fw-semibold">
+            Create account
+          </a>
         </div>
       </form>
 
