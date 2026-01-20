@@ -23,9 +23,9 @@
   <!-- =========================================================================
        SEKCJA 1: CZAT (Lewa strona / Środek)
        ========================================================================= -->
-  <section 
+  <section
     class="flex-column flex-grow-1 bg-white desktop-visible"
-    [class.d-flex]="selectedUser" 
+    [class.d-flex]="selectedUser"
     [class.d-none]="!selectedUser"
     style="min-width: 0;"
   >
@@ -57,7 +57,7 @@
 
     <!-- OBSZAR WIADOMOŚCI -->
     <div class="flex-grow-1 overflow-auto p-4 d-flex flex-column" style="background-color: #f0f2f5;">
-      
+
       <ng-container *ngIf="selectedUser; else noChatSelected">
         <div *ngFor="let msg of messages" class="d-flex mb-3"
              [ngClass]="{'justify-content-end': msg.fromId === myId, 'justify-content-start': msg.fromId !== myId}">
@@ -100,17 +100,17 @@
   <!-- =========================================================================
        SEKCJA 2: LISTA ROZMÓW (Prawa strona)
        ========================================================================= -->
-  <aside 
+  <aside
     class="chat-sidebar flex-column bg-white desktop-visible"
     [class.d-flex]="!selectedUser"
     [class.d-none]="selectedUser"
   >
-    
+
     <!-- HEADER LISTY -->
     <div class="p-3 border-bottom" style="height: 72px; display: flex; align-items: center;">
       <div class="w-100 bg-light rounded-pill px-3 py-2 d-flex align-items-center">
         <i class="bi bi-search text-secondary me-2"></i>
-        <input type="text" class="form-control border-0 bg-transparent p-0 shadow-none small" 
+        <input type="text" class="form-control border-0 bg-transparent p-0 shadow-none small"
                placeholder="Search..." />
       </div>
     </div>
@@ -118,10 +118,10 @@
     <!-- LISTA UŻYTKOWNIKÓW -->
     <div class="flex-grow-1 overflow-auto">
       <div *ngFor="let user of users" class="border-bottom">
-        <button (click)="selectUser(user)" 
+        <button (click)="selectUser(user)"
                 class="w-100 border-0 bg-transparent p-3 text-start d-flex align-items-center gap-3 list-group-item-action"
                 [class.bg-light]="selectedUser?.id === user.id">
-          
+
           <div class="position-relative">
             <div class="rounded-circle bg-light border d-flex align-items-center justify-content-center text-secondary fw-bold"
                  style="width: 48px; height: 48px;">
@@ -133,11 +133,13 @@
 
           <div class="overflow-hidden">
             <div class="fw-bold text-dark text-truncate">{{ user.name }}</div>
-            <div class="small text-secondary text-truncate">Lorem ipsum dolor sit amet...</div>
+            <div class="small text-secondary text-truncate">
+              {{ user.lastMsg || 'Brak wiadomości' }}
+            </div>
           </div>
         </button>
       </div>
-      
+
       <div *ngIf="!users || users.length === 0" class="p-4 text-center text-secondary small">
         No chats available.
       </div>
