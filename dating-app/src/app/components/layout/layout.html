@@ -1,79 +1,144 @@
-<!-- Główny kontener aplikacji -->
-<div class="d-flex flex-column min-vh-100 bg-light">
+<!-- layout.html -->
 
-  <!-- GÓRNY PASEK (Widoczny wszędzie oprócz logowania) -->
-  <nav class="navbar sticky-top navbar-light bg-white shadow-sm px-4 d-none d-md-flex justify-content-between z-3">
-    <div class="d-flex align-items-center">
-      <i class="bi bi-facebook text-primary fs-3 me-2"></i>
-      <span class="fw-bold fs-4">SocialApp</span>
-    </div>
+<!-- ZMIANA: przebudowa struktury na shell (topbar + sidebar + main + opcjonalny prawy panel + mobile bottom-nav) -->
+<div class="app-shell d-flex flex-column min-vh-100 bg-light">
 
-    <!-- Wyszukiwarka -->
-    <div class="w-50 mx-4">
-      <div class="input-group">
-        <span class="input-group-text bg-light border-0"><i class="bi bi-search"></i></span>
-        <input type="text" class="form-control bg-light border-0" placeholder="Szukaj na SocialApp...">
+  <!-- ZMIANA: Topbar widoczny na wszystkich rozdzielczościach (na md+ pokazuje też nazwę i logout) -->
+  <header class="app-topbar sticky-top bg-white border-bottom z-3">
+    <div class="container-fluid px-2 px-md-4 py-2 d-flex align-items-center justify-content-between gap-2">
+
+      <!-- Lewa strona: logo + wyszukiwarka -->
+      <div class="d-flex align-items-center gap-2 flex-grow-1">
+        <!-- ZMIANA: proste logo jak w makiecie; bez wpływu na funkcjonalność -->
+        <a routerLink="/feed" class="text-decoration-none d-none d-md-inline-flex align-items-center">
+          <div class="rounded-3 border d-flex align-items-center justify-content-center"
+               style="width:38px;height:38px;">
+            <span class="fw-bold">U</span>
+          </div>
+        </a>
+
+        <!-- ZMIANA: wyszukiwarka w stylu pill + ikony po prawej jak na makietach -->
+        <div class="flex-grow-1 d-flex align-items-center bg-light rounded-pill px-3"
+             style="min-height:38px;">
+          <i class="bi bi-search text-secondary me-2"></i>
+          <input
+            type="text"
+            class="form-control border-0 bg-transparent p-0 shadow-none"
+            placeholder="Search..."
+            aria-label="Search"
+          />
+          <button class="btn p-0 ms-2 border-0 bg-transparent text-secondary" type="button" aria-label="Settings">
+            <i class="bi bi-gear fs-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Prawa strona (md+): nazwa + logout -->
+      <div class="d-none d-md-flex align-items-center gap-3">
+        <!-- ZMIANA: label użytkownika jak na makietach (tekst statyczny – brak zmian funkcjonalnych) -->
+        <span class="small fw-semibold text-secondary">Name Surname</span>
+
+        <!-- Logout (zostaje ta sama akcja) -->
+        <button
+          (click)="authService.logout()"
+          class="btn p-0 border-0 bg-transparent"
+          title="Wyloguj"
+          aria-label="Wyloguj"
+        >
+          <i class="bi bi-box-arrow-right text-danger fs-4"></i>
+        </button>
       </div>
     </div>
+  </header>
 
-    <!-- Menu -->
-    <div class="d-flex gap-4 fs-4 text-secondary align-items-center"> <!-- dodałem align-items-center -->
-      <a routerLink="/feed" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
-        <i class="bi bi-house-door-fill"></i>
-      </a>
-      <a routerLink="/events" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
-        <i class="bi bi-calendar-event-fill"></i>
-      </a>
-      <a routerLink="/messages" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
-        <i class="bi bi-chat-dots-fill"></i>
-      </a>
-      <a routerLink="/profile" routerLinkActive="text-primary" class="text-secondary" style="cursor: pointer;">
-        <i class="bi bi-person-circle"></i>
-      </a>
+  <!-- ZMIANA: Body jako układ 3-kolumnowy na md+/lg+ -->
+  <div class="app-body d-flex flex-grow-1">
 
-      <!-- PRZYCISK WYLOGOWANIA (NOWY) -->
-      <button (click)="authService.logout()" class="btn text-secondary fs-4 p-0 border-0 bg-transparent" title="Wyloguj">
-        <i class="bi bi-box-arrow-right text-danger"></i>
-      </button>
-    </div>
-  </nav>
+    <!-- ZMIANA: Sidebar (tablet/desktop) -->
+    <aside class="app-sidebar d-none d-md-flex flex-column bg-white border-end"
+           style="width:240px;">
+      <div class="p-3">
+        <div class="small text-uppercase text-secondary fw-semibold mb-2">Menu</div>
 
-  <!-- MIEJSCE NA ZMIENNĄ TREŚĆ (Feed, Profil, Wiadomości) -->
-  <div class="flex-grow-1">
-    <router-outlet></router-outlet>
+        <nav class="d-flex flex-column gap-2">
+          <a routerLink="/feed" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
+            <i class="bi bi-house-door-fill"></i><span>Home</span>
+          </a>
+
+          <!-- ZMIANA: pomijamy Pages (zgodnie z Twoją informacją), nie dodaję nowego komponentu -->
+          <a routerLink="/events" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
+            <i class="bi bi-calendar-event-fill"></i><span>Events</span>
+          </a>
+
+          <a routerLink="/messages" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
+            <i class="bi bi-chat-dots-fill"></i><span>Chats</span>
+          </a>
+
+          <a routerLink="/profile" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
+            <i class="bi bi-person-circle"></i><span>Profile</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <!-- ZMIANA: główna przestrzeń z paddingiem; zostaje router-outlet bez zmian logiki -->
+    <main class="app-main flex-grow-1 px-2 px-md-3 py-3">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- ZMIANA: Prawy panel (tylko lg+) jako “rail” podobny do makiet (np. wyszukiwarka/listy) -->
+    <aside class="app-rail d-none d-lg-flex flex-column bg-light border-start"
+           style="width:320px;">
+      <div class="p-3">
+        <div class="bg-white rounded-3 border p-2">
+          <div class="d-flex align-items-center bg-light rounded-pill px-3" style="min-height:38px;">
+            <i class="bi bi-search text-secondary me-2"></i>
+            <input
+              type="text"
+              class="form-control border-0 bg-transparent p-0 shadow-none"
+              placeholder="Search..."
+              aria-label="Search in panel"
+            />
+          </div>
+        </div>
+      </div>
+    </aside>
+
   </div>
 
-  <!-- DOLNY PASEK (Tylko Mobile) -->
-  <nav class="navbar fixed-bottom navbar-light bg-white border-top d-md-none pb-2 pt-2 z-3">
-    <div class="container-fluid d-flex justify-content-between px-3"> <!-- Zmieniono justify na between i dodano px-3 -->
+  <!-- ZMIANA: Dolna nawigacja – tylko mobile; układ jak na makietach -->
+  <nav class="app-bottomnav navbar fixed-bottom navbar-light bg-white border-top d-md-none py-2 z-3">
+    <div class="container-fluid d-flex justify-content-between px-3">
 
-      <!-- Feed -->
-      <a routerLink="/feed" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
+      <a routerLink="/feed" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Home">
         <i class="bi bi-house-door-fill fs-4"></i>
       </a>
 
-      <!-- Events (NOWE) -->
-      <a routerLink="/events" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
+      <a routerLink="/events" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Events">
         <i class="bi bi-calendar-event-fill fs-4"></i>
       </a>
 
-      <!-- Messages -->
-      <a routerLink="/messages" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
+      <a routerLink="/messages" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Messages">
         <i class="bi bi-chat-dots-fill fs-4"></i>
       </a>
 
-      <!-- Profile -->
-      <a routerLink="/profile" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
+      <a routerLink="/profile" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Profile">
         <i class="bi bi-person-circle fs-4"></i>
       </a>
 
-      <!-- Wyloguj (NOWE) -->
-      <button (click)="authService.logout()" class="btn nav-link text-secondary border-0 bg-transparent p-2">
+      <button
+        (click)="authService.logout()"
+        class="btn nav-link text-secondary border-0 bg-transparent p-2"
+        aria-label="Wyloguj"
+        title="Wyloguj"
+      >
         <i class="bi bi-box-arrow-right fs-4 text-danger"></i>
       </button>
 
     </div>
   </nav>
 
-
+  <!-- ZMIANA: odstęp na fixed bottom-nav, żeby treść nie była pod spodem (mobile) -->
+  <div class="d-md-none" style="height:64px;"></div>
 </div>

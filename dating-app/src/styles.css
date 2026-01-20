@@ -1,1 +1,133 @@
-/* You can add global styles to this file, and also import other style files */
+/* =========================================
+   ZMIENNE (Kolory i wymiary z makiet)
+   ========================================= */
+:root {
+  --app-bg-color: #f0f2f5;       /* Jasnoszare tło całej aplikacji */
+  --app-primary-color: #1877f2;  /* Niebieski kolor akcentu (jak na screenach) */
+  --app-text-color: #050505;
+  --app-text-secondary: #65676b;
+  --app-header-height: 56px;
+  --app-sidebar-width: 280px;    /* Szerokość lewego panelu */
+  --app-rail-width: 360px;       /* Szerokość prawego panelu */
+}
+
+body {
+  background-color: var(--app-bg-color);
+  color: var(--app-text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* =========================================
+   GLOBALNE NARZĘDZIA
+   ========================================= */
+
+/* Zaokrąglone przyciski i inputy (pill shape) */
+.rounded-pill-custom {
+  border-radius: 20px;
+}
+
+/* Pasek wyszukiwania w nagłówku i panelach */
+.form-control:focus {
+  box-shadow: none; /* Usunięcie domyślnej poświaty Bootstrapa */
+}
+
+/* =========================================
+   TOPBAR (Górny pasek)
+   ========================================= */
+.app-topbar {
+  height: var(--app-header-height);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+/* Logo "U" */
+.app-topbar .rounded-3.border {
+  background: linear-gradient(to bottom right, #ffffff, #f0f2f5);
+  color: var(--app-primary-color);
+  border-color: var(--app-primary-color) !important;
+  font-size: 1.2rem;
+}
+
+/* =========================================
+   SIDEBARS (Boczne panele - Desktop/Tablet)
+   ========================================= */
+
+/* Sprawia, że panele boczne są "przyklejone" podczas scrollowania środka */
+.app-sidebar,
+.app-rail {
+  position: sticky;
+  top: var(--app-header-height);
+  height: calc(100vh - var(--app-header-height));
+  overflow-y: auto;
+  /* Ukrycie paska przewijania w sidebarach dla estetyki */
+  scrollbar-width: thin; 
+}
+
+.app-sidebar {
+  background-color: transparent !important; /* Na makiecie sidebar zlewa się z tłem */
+  border-right: none !important;            /* Usuwamy ramkę, by wyglądało czysto */
+  padding-top: 1rem;
+}
+
+.app-rail {
+  background-color: transparent !important;
+  border-left: none !important;
+  padding-top: 1rem;
+}
+
+/* Linki w menu bocznym */
+.app-sidebar .btn {
+  border: none;
+  background-color: transparent;
+  color: var(--app-text-secondary);
+  font-weight: 500;
+  padding: 0.5rem 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.app-sidebar .btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.app-sidebar .btn i {
+  font-size: 1.2rem;
+  color: var(--app-primary-color); /* Ikony na niebiesko jak na makietach */
+}
+
+/* Aktywny link w menu bocznym (klasa dodawana przez routerLinkActive) */
+.app-sidebar .active {
+  background-color: rgba(24, 119, 242, 0.1) !important; /* Jasnoniebieskie tło */
+  color: var(--app-primary-color) !important;
+}
+
+/* =========================================
+   BOTTOM NAV (Mobile)
+   ========================================= */
+.app-bottomnav {
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.app-bottomnav .nav-link {
+  color: var(--app-text-secondary);
+  position: relative;
+}
+
+/* Aktywny link na dole */
+.app-bottomnav .text-primary {
+  color: var(--app-primary-color) !important;
+}
+
+/* Opcjonalnie: Kreska pod aktywnym elementem menu dolnego (jak na niektórych makietach) */
+.app-bottomnav .text-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 2px;
+  background-color: var(--app-primary-color);
+}
+
