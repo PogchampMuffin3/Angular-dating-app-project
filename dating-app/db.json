@@ -123,6 +123,15 @@
       "content": "Wpis testowy.",
       "likes": 0,
       "likedBy": []
+    },
+    {
+      "id": 1768908481530,
+      "author": "Jan Kowalski",
+      "avatarColor": "bg-primary",
+      "time": "Przed chwilą",
+      "content": "Co słychać u was?",
+      "likes": 0,
+      "likedBy": []
     }
   ],
   "messages": [
