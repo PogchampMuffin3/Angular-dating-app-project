@@ -102,6 +102,24 @@
       "content": "Wpis testowy.",
       "likes": 0,
       "likedBy": []
+    },
+    {
+      "id": 1768904018915,
+      "author": "Jan Kowalski",
+      "avatarColor": "bg-primary",
+      "time": "Przed chwilą",
+      "content": "Wpis testowy",
+      "likes": 0,
+      "likedBy": []
+    },
+    {
+      "id": 1768904037438,
+      "author": "Jan Kowalski",
+      "avatarColor": "bg-primary",
+      "time": "Przed chwilą",
+      "content": "Wpis testowy.",
+      "likes": 0,
+      "likedBy": []
     }
   ],
   "messages": [

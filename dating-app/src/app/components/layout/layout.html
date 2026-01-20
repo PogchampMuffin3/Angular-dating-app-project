@@ -1,15 +1,13 @@
 <!-- layout.html -->
 
-<!-- ZMIANA: przebudowa struktury na shell (topbar + sidebar + main + opcjonalny prawy panel + mobile bottom-nav) -->
 <div class="app-shell d-flex flex-column min-vh-100 bg-light">
 
-  <!-- ZMIANA: Topbar widoczny na wszystkich rozdzielczościach (na md+ pokazuje też nazwę i logout) -->
+  <!-- Topbar -->
   <header class="app-topbar sticky-top bg-white border-bottom z-3">
     <div class="container-fluid px-2 px-md-4 py-2 d-flex align-items-center justify-content-between gap-2">
 
-      <!-- Lewa strona: logo + wyszukiwarka -->
+      <!-- Lewa strona -->
       <div class="d-flex align-items-center gap-2 flex-grow-1">
-        <!-- ZMIANA: proste logo jak w makiecie; bez wpływu na funkcjonalność -->
         <a routerLink="/feed" class="text-decoration-none d-none d-md-inline-flex align-items-center">
           <div class="rounded-3 border d-flex align-items-center justify-content-center"
                style="width:38px;height:38px;">
@@ -17,7 +15,6 @@
           </div>
         </a>
 
-        <!-- ZMIANA: wyszukiwarka w stylu pill + ikony po prawej jak na makietach -->
         <div class="flex-grow-1 d-flex align-items-center bg-light rounded-pill px-3"
              style="min-height:38px;">
           <i class="bi bi-search text-secondary me-2"></i>
@@ -27,23 +24,19 @@
             placeholder="Search..."
             aria-label="Search"
           />
-          <button class="btn p-0 ms-2 border-0 bg-transparent text-secondary" type="button" aria-label="Settings">
+          <button class="btn p-0 ms-2 border-0 bg-transparent text-secondary" type="button">
             <i class="bi bi-gear fs-5"></i>
           </button>
         </div>
       </div>
 
-      <!-- Prawa strona (md+): nazwa + logout -->
+      <!-- Prawa strona -->
       <div class="d-none d-md-flex align-items-center gap-3">
-        <!-- ZMIANA: label użytkownika jak na makietach (tekst statyczny – brak zmian funkcjonalnych) -->
         <span class="small fw-semibold text-secondary">Name Surname</span>
-
-        <!-- Logout (zostaje ta sama akcja) -->
         <button
           (click)="authService.logout()"
           class="btn p-0 border-0 bg-transparent"
           title="Wyloguj"
-          aria-label="Wyloguj"
         >
           <i class="bi bi-box-arrow-right text-danger fs-4"></i>
         </button>
@@ -51,10 +44,10 @@
     </div>
   </header>
 
-  <!-- ZMIANA: Body jako układ 3-kolumnowy na md+/lg+ -->
+  <!-- Body -->
   <div class="app-body d-flex flex-grow-1">
 
-    <!-- ZMIANA: Sidebar (tablet/desktop) -->
+    <!-- Sidebar (Lewy) -->
     <aside class="app-sidebar d-none d-md-flex flex-column bg-white border-end"
            style="width:240px;">
       <div class="p-3">
@@ -64,16 +57,12 @@
           <a routerLink="/feed" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
             <i class="bi bi-house-door-fill"></i><span>Home</span>
           </a>
-
-          <!-- ZMIANA: pomijamy Pages (zgodnie z Twoją informacją), nie dodaję nowego komponentu -->
           <a routerLink="/events" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
             <i class="bi bi-calendar-event-fill"></i><span>Events</span>
           </a>
-
           <a routerLink="/messages" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
             <i class="bi bi-chat-dots-fill"></i><span>Chats</span>
           </a>
-
           <a routerLink="/profile" routerLinkActive="active" class="btn btn-light text-start d-flex align-items-center gap-2">
             <i class="bi bi-person-circle"></i><span>Profile</span>
           </a>
@@ -81,14 +70,14 @@
       </div>
     </aside>
 
-    <!-- Main -->
-    <!-- ZMIANA: główna przestrzeń z paddingiem; zostaje router-outlet bez zmian logiki -->
+    <!-- Main Content -->
     <main class="app-main flex-grow-1 px-2 px-md-3 py-3">
       <router-outlet></router-outlet>
     </main>
 
-    <!-- ZMIANA: Prawy panel (tylko lg+) jako “rail” podobny do makiet (np. wyszukiwarka/listy) -->
-    <aside class="app-rail d-none d-lg-flex flex-column bg-light border-start"
+    <!-- ZMIANA: Prawy panel (Rail) - ukrywany na stronie wiadomości -->
+    <aside *ngIf="showRightSidebar" 
+           class="app-rail d-none d-lg-flex flex-column bg-light border-start"
            style="width:320px;">
       <div class="p-3">
         <div class="bg-white rounded-3 border p-2">
@@ -107,38 +96,26 @@
 
   </div>
 
-  <!-- ZMIANA: Dolna nawigacja – tylko mobile; układ jak na makietach -->
+  <!-- Bottom Nav (Mobile) -->
   <nav class="app-bottomnav navbar fixed-bottom navbar-light bg-white border-top d-md-none py-2 z-3">
     <div class="container-fluid d-flex justify-content-between px-3">
-
-      <a routerLink="/feed" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Home">
+      <a routerLink="/feed" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
         <i class="bi bi-house-door-fill fs-4"></i>
       </a>
-
-      <a routerLink="/events" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Events">
+      <a routerLink="/events" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
         <i class="bi bi-calendar-event-fill fs-4"></i>
       </a>
-
-      <a routerLink="/messages" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Messages">
+      <a routerLink="/messages" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
         <i class="bi bi-chat-dots-fill fs-4"></i>
       </a>
-
-      <a routerLink="/profile" routerLinkActive="text-primary" class="nav-link text-secondary p-2" aria-label="Profile">
+      <a routerLink="/profile" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
         <i class="bi bi-person-circle fs-4"></i>
       </a>
-
-      <button
-        (click)="authService.logout()"
-        class="btn nav-link text-secondary border-0 bg-transparent p-2"
-        aria-label="Wyloguj"
-        title="Wyloguj"
-      >
+      <button (click)="authService.logout()" class="btn nav-link text-secondary border-0 bg-transparent p-2">
         <i class="bi bi-box-arrow-right fs-4 text-danger"></i>
       </button>
-
     </div>
   </nav>
 
-  <!-- ZMIANA: odstęp na fixed bottom-nav, żeby treść nie była pod spodem (mobile) -->
   <div class="d-md-none" style="height:64px;"></div>
 </div>
