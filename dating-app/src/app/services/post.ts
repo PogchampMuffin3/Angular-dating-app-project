@@ -28,14 +28,12 @@ export class PostService {
     const currentUser = this.authService.getCurrentUserValue();
     const authorName = currentUser ? currentUser.name : 'Gosc';
     const authorAvater = currentUser ? currentUser.avatarColor : 'bg-secondary';
-    
-    // ZMIANA: Dodano pole createdAt (data utworzenia)
+
     const newPost = {
-      id: Date.now(), // Unikalne ID
+      id: Date.now(),
       author: authorName,
       avatarColor: authorAvater,
-      time: 'Przed chwilą', // To pole tekstowe zostawiamy dla kompatybilności
-      createdAt: Date.now(), // <--- TO POLE BĘDZIEMY WYŚWIETLAĆ JAKO DATĘ
+      createdAt: Date.now(),
       content: content,
       likes: 0,
       likedBy: []
