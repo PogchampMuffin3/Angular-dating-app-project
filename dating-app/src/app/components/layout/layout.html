@@ -15,8 +15,9 @@
           </div>
         </a>
 
+        <!-- Wyszukiwarka główna -->
         <div class="flex-grow-1 d-flex align-items-center bg-light rounded-pill px-3"
-             style="min-height:38px;">
+             style="min-height:38px; max-width: 600px;">
           <i class="bi bi-search text-secondary me-2"></i>
           <input
             type="text"
@@ -24,9 +25,6 @@
             placeholder="Search..."
             aria-label="Search"
           />
-          <button class="btn p-0 ms-2 border-0 bg-transparent text-secondary" type="button">
-            <i class="bi bi-gear fs-5"></i>
-          </button>
         </div>
       </div>
 
@@ -74,25 +72,6 @@
     <main class="app-main flex-grow-1 px-2 px-md-3 py-3">
       <router-outlet></router-outlet>
     </main>
-
-    <!-- ZMIANA: Prawy panel (Rail) - ukrywany na stronie wiadomości -->
-    <aside *ngIf="showRightSidebar" 
-           class="app-rail d-none d-lg-flex flex-column bg-light border-start"
-           style="width:320px;">
-      <div class="p-3">
-        <div class="bg-white rounded-3 border p-2">
-          <div class="d-flex align-items-center bg-light rounded-pill px-3" style="min-height:38px;">
-            <i class="bi bi-search text-secondary me-2"></i>
-            <input
-              type="text"
-              class="form-control border-0 bg-transparent p-0 shadow-none"
-              placeholder="Search..."
-              aria-label="Search in panel"
-            />
-          </div>
-        </div>
-      </div>
-    </aside>
 
   </div>
 

@@ -69,8 +69,10 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "csa",
-      "likes": 0,
-      "likedBy": []
+      "likes": 1,
+      "likedBy": [
+        1
+      ]
     },
     {
       "id": 1768852095068,
@@ -78,9 +80,10 @@
       "avatarColor": "bg-secondary",
       "time": "Przed chwilą",
       "content": "test",
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        3
+        3,
+        1
       ]
     },
     {
@@ -157,6 +160,13 @@
       "toId": 1,
       "content": "adsdas",
       "time": "20:51"
+    },
+    {
+      "id": 1768907505106,
+      "fromId": 1,
+      "toId": 1768852338626,
+      "content": "Cześć to wiadomość testowa!",
+      "time": "12:11"
     }
   ]
 }

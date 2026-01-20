@@ -1,68 +1,74 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { PostService } from '../../services/post';
 import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './profile.html',
   styles: ``
 })
 export class Profile implements OnInit {
-  private http = inject(HttpClient);
-  private authService = inject(Auth, { optional: true });
+  posts: any[] = [];
+  newPostContent = '';
+  myId: number = 0;
+
+  private postService = inject(PostService);
+  public authService = inject(Auth);
   private cdr = inject(ChangeDetectorRef);
 
-  user: any = null;
-  userPosts: any[] = [];
-
-  private API_URL = 'http://localhost:3000'; 
-
-  extraInfo = {
-    bio: 'Student Informatyki | Angular Enthusiast 🚀',
-    work: 'Angular Devs',
-    location: 'Warszawa',
-    friendsCount: 345
-  };
-
   ngOnInit() {
-    let targetUserId: any = 1;
-
-    if (this.authService) {
-      const loggedUser = this.authService.getCurrentUserValue();
-      if (loggedUser && loggedUser.id) {
-        targetUserId = loggedUser.id;
-      }
+    const user = this.authService.getCurrentUserValue();
+    if (user) {
+      this.myId = user.id;
+      this.loadMyPosts();
     }
-
-    this.loadUserProfile(targetUserId);
   }
 
-  loadUserProfile(userId: any) {
-    this.http.get<any>(`${this.API_URL}/users/${userId}`).subscribe({
-      next: (u) => {
-        this.user = { ...u, ...this.extraInfo };
-        
-        const authorName = u.name || u.email || 'Nieznany';
-        this.loadPosts(authorName);
-        
-        this.cdr.detectChanges();
+  loadMyPosts() {
+    this.postService.getPosts().subscribe(data => {
+      // Filtrujemy posty tylko dla zalogowanego użytkownika (lub np. wg ID z URL, jeśli robisz podgląd innych)
+      // Tutaj zakładam profil "Mój", więc filtruję po this.myId (o ile post ma pole authorId, lub po nazwie autora)
+      
+      // Proste filtrowanie po autorze (dopasuj do swojego API/modelu danych)
+      const currentUser = this.authService.getCurrentUserValue();
+      if(currentUser) {
+         // Zakładam, że w postach jest pole 'author' z nazwą lub 'authorId'
+         // Jeśli nie masz ID autora w poście, filtruj po nazwie:
+         this.posts = data.filter(p => p.author === currentUser.name).slice().reverse();
+      } else {
+         this.posts = [];
       }
+      
+      this.cdr.detectChanges();
     });
   }
 
-  loadPosts(authorName: string) {
-    this.http.get<any[]>(`${this.API_URL}/posts`).pipe(
-      map(posts => posts.filter(p => p.author === authorName))
-    ).subscribe({
-      next: (posts) => {
-        this.userPosts = posts;
+  addPost() {
+    if (this.newPostContent.trim()) {
+      this.postService.addPost(this.newPostContent).subscribe(() => {
+        this.newPostContent = '';
+        this.loadMyPosts();
+      });
+    }
+  }
+
+  isLikedByMe(post: any): boolean {
+    if (!post.likedBy) return false;
+    return post.likedBy.includes(this.myId);
+  }
+
+  likePost(post: any) {
+    this.postService.toggleLike(post.id).subscribe({
+      next: (updatedPost) => {
+        post.likes = updatedPost.likes;
+        post.likedBy = updatedPost.likedBy;
         this.cdr.detectChanges();
-      }
+      },
+      error: (err) => console.error("Error liking post:", err)
     });
   }
 }
