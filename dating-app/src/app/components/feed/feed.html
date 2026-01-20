@@ -1,30 +1,26 @@
 <!-- feed.html -->
 
-<!-- ZMIANA: Główny kontener z ograniczeniem szerokości dla czytelności na dużych ekranach -->
 <div class="mx-auto" style="max-width: 680px;">
 
-  <!-- ZMIANA: Sekcja dodawania nowego posta ("What's up?") -->
+  <!-- SEKCJA DODAWANIA POSTA (Zmiana: input i przycisk w jednej linii) -->
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
-      <div class="d-flex gap-2 mb-3">
-        <!-- Placeholder na awatar użytkownika -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Awatar -->
         <div class="bg-secondary rounded-circle flex-shrink-0" style="width: 40px; height: 40px;"></div>
         
-        <!-- Input stylizowany na "pill" -->
-        <input 
-          type="text" 
-          class="form-control rounded-pill bg-light border-0 px-3" 
-          placeholder="What's up?"
-          [(ngModel)]="newPostContent"
-          (keyup.enter)="addPost()"
-        >
-      </div>
-      
-      <!-- Linia podziału -->
-      <hr class="my-2">
-      
-      <!-- Przycisk publikacji -->
-      <div class="d-flex justify-content-end">
+        <!-- Input -->
+        <div class="flex-grow-1">
+          <input 
+            type="text" 
+            class="form-control rounded-pill bg-light border-0 px-3" 
+            placeholder="What's up?"
+            [(ngModel)]="newPostContent"
+            (keyup.enter)="addPost()"
+          >
+        </div>
+
+        <!-- Przycisk (Teraz obok inputa) -->
         <button 
           class="btn btn-primary px-4 rounded-pill fw-bold" 
           [disabled]="!newPostContent.trim()"
@@ -36,47 +32,35 @@
     </div>
   </div>
 
-  <!-- ZMIANA: Lista postów -->
+  <!-- Lista postów (Bez zmian) -->
   <div class="d-flex flex-column gap-3">
-    
-    <!-- Pętla po postach -->
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
         
-        <!-- Nagłówek posta: Autor + Data + Opcje -->
+        <!-- Nagłówek -->
         <div class="p-3 d-flex justify-content-between align-items-start">
           <div class="d-flex gap-2">
-            <!-- Awatar autora -->
             <div class="bg-secondary rounded-circle" style="width: 40px; height: 40px;"></div>
-            
             <div>
               <div class="fw-bold text-dark" style="font-size: 0.95rem;">
                 {{ post.author || 'Name Surname' }}
               </div>
               <div class="text-secondary small" style="font-size: 0.8rem;">
-                <!-- Wyświetlanie daty (mockowane "1 day ago" jeśli brak prawdziwej daty formatowania) -->
                 {{ post.date | date:'mediumDate' }}
               </div>
             </div>
           </div>
-          
-          <!-- Menu opcji (trzy kropki) -->
           <button class="btn btn-link text-secondary p-0 text-decoration-none">
             <i class="bi bi-three-dots"></i>
           </button>
         </div>
 
-        <!-- Treść posta -->
+        <!-- Treść -->
         <div class="px-3 pb-2">
-          <p class="card-text text-dark mb-2">
-            {{ post.content }}
-          </p>
+          <p class="card-text text-dark mb-2">{{ post.content }}</p>
         </div>
 
-        <!-- Obrazek posta (jeśli istnieje - opcjonalnie) -->
-        <!-- <img *ngIf="post.image" [src]="post.image" class="img-fluid w-100" alt="Post image"> -->
-
-        <!-- Liczniki (Lajki, Komentarze) - sekcja informacyjna przed przyciskami -->
+        <!-- Liczniki -->
         <div class="px-3 py-2 d-flex justify-content-between align-items-center text-secondary small border-bottom">
           <div class="d-flex align-items-center gap-1">
             <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white" style="width: 18px; height: 18px;">
@@ -84,38 +68,27 @@
             </div>
             <span>{{ post.likes }}</span>
           </div>
-          <!-- Placeholder na liczbę komentarzy/udostępnień -->
           <div>
             <span>300 comments</span> &middot; <span>51 shares</span>
           </div>
         </div>
 
-        <!-- Stopka z akcjami: Like, Comment, Share -->
+        <!-- Akcje -->
         <div class="px-2 py-1">
           <div class="d-flex justify-content-between">
-            
-            <!-- Like Button -->
             <button 
               class="btn btn-light flex-grow-1 border-0 rounded-3 d-flex align-items-center justify-content-center gap-2 py-2 text-secondary fw-semibold"
               [class.text-primary]="isLikedByMe(post)"
               (click)="likePost(post)"
             >
-              <i class="bi" [class.bi-hand-thumbs-up-fill]="isLikedByMe(post)" [class.bi-hand-thumbs-up]="!isLikedByMe(post)"></i>
-              Like
+              <i class="bi" [class.bi-hand-thumbs-up-fill]="isLikedByMe(post)" [class.bi-hand-thumbs-up]="!isLikedByMe(post)"></i> Like
             </button>
-            
-            <!-- Comment Button (wizualny) -->
             <button class="btn btn-light flex-grow-1 border-0 rounded-3 d-flex align-items-center justify-content-center gap-2 py-2 text-secondary fw-semibold">
-              <i class="bi bi-chat-left"></i>
-              Comment
+              <i class="bi bi-chat-left"></i> Comment
             </button>
-            
-            <!-- Share Button (wizualny) -->
             <button class="btn btn-light flex-grow-1 border-0 rounded-3 d-flex align-items-center justify-content-center gap-2 py-2 text-secondary fw-semibold">
-              <i class="bi bi-share"></i>
-              Share
+              <i class="bi bi-share"></i> Share
             </button>
-            
           </div>
         </div>
 
@@ -123,6 +96,5 @@
     </div>
   </div>
   
-  <!-- ZMIANA: Odstęp na dole, żeby ostatni post nie chował się pod menu mobilnym -->
   <div style="height: 20px;"></div>
 </div>
