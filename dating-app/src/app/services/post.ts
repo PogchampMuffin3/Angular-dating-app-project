@@ -33,7 +33,6 @@ export class PostService {
       id: Date.now(),
       author: authorName,
       avatarColor: authorAvater,
-      createdAt: Date.now(),
       content: content,
       likes: 0,
       likedBy: []

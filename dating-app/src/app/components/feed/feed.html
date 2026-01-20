@@ -6,26 +6,26 @@
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
       <div class="d-flex align-items-center gap-2">
-        <div 
+        <div
           class="rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center text-white fw-bold"
           [ngClass]="authService.getCurrentUserValue()?.avatarColor || 'bg-secondary'"
           style="width: 40px; height: 40px;"
         >
           {{ authService.getCurrentUserValue()?.name?.charAt(0) || 'U' }}
         </div>
-        
+
         <div class="flex-grow-1">
-          <input 
-            type="text" 
-            class="form-control rounded-pill bg-light border-0 px-3" 
+          <input
+            type="text"
+            class="form-control rounded-pill bg-light border-0 px-3"
             placeholder="What's up?"
             [(ngModel)]="newPostContent"
             (keyup.enter)="addPost()"
           >
         </div>
 
-        <button 
-          class="btn btn-primary px-4 rounded-pill fw-bold" 
+        <button
+          class="btn btn-primary px-4 rounded-pill fw-bold"
           [disabled]="!newPostContent.trim()"
           (click)="addPost()"
         >
@@ -39,26 +39,26 @@
   <div class="d-flex flex-column gap-3">
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
-        
+
         <div class="p-3 d-flex justify-content-between align-items-start">
           <div class="d-flex gap-2">
-            <div 
+            <div
               class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
               [ngClass]="post.avatarColor || 'bg-secondary'"
               style="width: 40px; height: 40px;"
             >
               {{ post.author?.charAt(0) || '?' }}
             </div>
-            
+
             <div>
               <div class="fw-bold text-dark" style="font-size: 0.95rem;">
                 {{ post.author || 'Name Surname' }}
               </div>
-              
+
               <!-- ZMIANA: Wyświetlanie sformatowanej daty -->
               <!-- Używamy post.createdAt (nowe) lub post.id (stare, bo id to timestamp) -->
               <div class="text-secondary small" style="font-size: 0.75rem; margin-top: -2px;">
-                {{ (post.createdAt || post.id) | date:'medium' }}
+                {{ (post.id) | date:'medium' }}
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
 
         <div class="px-2 py-1">
           <div class="d-flex justify-content-between">
-            <button 
+            <button
               class="btn btn-light flex-grow-1 border-0 rounded-3 d-flex align-items-center justify-content-center gap-2 py-2 text-secondary fw-semibold"
               [class.text-primary]="isLikedByMe(post)"
               (click)="likePost(post)"
@@ -104,6 +104,6 @@
       </div>
     </div>
   </div>
-  
+
   <div style="height: 20px;"></div>
 </div>
