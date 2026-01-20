@@ -32,7 +32,7 @@ export class PostService {
     const newPost = {
       author: authorName,
       avatarColor: authorAvater,
-      time: 'Przed chwilą',
+      time: new Date().toLocaleString(),
       content: content,
       likes: 0,
       likedBy: []
