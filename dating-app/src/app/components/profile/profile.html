@@ -10,7 +10,6 @@
       <div class="d-flex flex-column flex-md-row align-items-start align-items-md-end gap-3" style="margin-top: -40px;">
         
         <div class="rounded-circle bg-white p-1">
-          <!-- ZMIANA: Duży awatar z kolorem użytkownika -->
           <div 
             class="rounded-circle text-white d-flex align-items-center justify-content-center display-4 fw-bold"
             [ngClass]="authService.getCurrentUserValue()?.avatarColor || 'bg-primary'"
@@ -47,7 +46,6 @@
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
       <div class="d-flex align-items-center gap-2">
-        <!-- ZMIANA: Mały awatar -->
         <div 
           class="rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center text-white fw-bold"
           [ngClass]="authService.getCurrentUserValue()?.avatarColor || 'bg-secondary'"
@@ -78,13 +76,12 @@
   </div>
 
 
-  <!-- LISTA MOICH POSTÓW -->
+  <!-- LISTA POSTÓW -->
   <div class="d-flex flex-column gap-3">
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
         <div class="p-3 d-flex justify-content-between align-items-start">
           <div class="d-flex gap-2">
-            <!-- ZMIANA: Awatar przy poście -->
             <div 
               class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
               [ngClass]="post.avatarColor || 'bg-secondary'"
@@ -95,7 +92,11 @@
             
             <div>
               <div class="fw-bold text-dark">{{ post.author }}</div>
-              <div class="text-secondary small">{{ post.date | date:'mediumDate' }}</div>
+              
+              <!-- ZMIANA: Wyświetlanie daty -->
+              <div class="text-secondary small" style="font-size: 0.75rem; margin-top: -2px;">
+                {{ (post.createdAt || post.id) | date:'medium' }}
+              </div>
             </div>
           </div>
           <button class="btn btn-link text-secondary p-0"><i class="bi bi-three-dots"></i></button>

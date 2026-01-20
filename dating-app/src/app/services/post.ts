@@ -28,19 +28,23 @@ export class PostService {
     const currentUser = this.authService.getCurrentUserValue();
     const authorName = currentUser ? currentUser.name : 'Gosc';
     const authorAvater = currentUser ? currentUser.avatarColor : 'bg-secondary';
-
+    
+    // ZMIANA: Dodano pole createdAt (data utworzenia)
     const newPost = {
+      id: Date.now(), // Unikalne ID
       author: authorName,
       avatarColor: authorAvater,
-      time: new Date().toLocaleString(),
+      time: 'Przed chwilą', // To pole tekstowe zostawiamy dla kompatybilności
+      createdAt: Date.now(), // <--- TO POLE BĘDZIEMY WYŚWIETLAĆ JAKO DATĘ
       content: content,
       likes: 0,
       likedBy: []
     };
+
     return this.http.post(this.apiUrl, newPost, this.getHeaders());
   }
 
   toggleLike(postId: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${postId}/like`, {}, this.getHeaders());
+    return this.http.post(`${this.apiUrl}/${postId}/like`, {}, this.getHeaders());
   }
 }
