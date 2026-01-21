@@ -19,28 +19,14 @@
       "email": "jakub@test.pl",
       "password": "123",
       "name": "Jakub Rosa",
-      "avatarColor": "bg-secondary"
-    },
-    {
-      "id": 1768852338626,
-      "email": "mail",
-      "password": "123",
-      "name": "Jakub Rosa v2",
-      "avatarColor": "bg-secondary"
+      "avatarColor": "bg-success"
     },
     {
       "id": 1768937838758,
       "email": "jakubdab@test.pl",
       "password": "123",
       "name": "Jakub Dąbrowski",
-      "avatarColor": "bg-secondary"
-    },
-    {
-      "id": 1768939047266,
-      "email": "test",
-      "password": "123",
-      "name": "Konto Testowe",
-      "avatarColor": "bg-secondary"
+      "avatarColor": "bg-warning"
     }
   ],
   "posts": [
