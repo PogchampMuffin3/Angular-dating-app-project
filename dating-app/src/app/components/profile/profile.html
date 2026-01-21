@@ -1,8 +1,7 @@
-<!-- profile.html -->
 
 <div class="mx-auto" style="max-width: 800px;">
   
-  <!-- HEADER -->
+  <!-- header -->
   <div class="card border-0 shadow-sm mb-3 overflow-hidden">
     <div class="bg-secondary bg-gradient" style="height: 150px;"></div>
     
@@ -42,7 +41,7 @@
   </div>
 
 
-  <!-- DODAWANIE POSTA -->
+  <!-- dodawanie posta -->
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
       <div class="d-flex align-items-center gap-2">
@@ -76,7 +75,7 @@
   </div>
 
 
-  <!-- LISTA POSTÓW -->
+  <!-- lista postów -->
   <div class="d-flex flex-column gap-3">
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
@@ -92,8 +91,6 @@
             
             <div>
               <div class="fw-bold text-dark">{{ post.author }}</div>
-              
-              <!-- ZMIANA: Wyświetlanie daty -->
               <div class="text-secondary small" style="font-size: 0.75rem; margin-top: -2px;">
                 {{ (post.createdAt || post.id) | date:'medium' }}
               </div>

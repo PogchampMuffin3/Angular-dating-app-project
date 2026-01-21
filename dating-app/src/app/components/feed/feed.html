@@ -1,8 +1,7 @@
-<!-- feed.html -->
 
 <div class="mx-auto" style="max-width: 680px;">
 
-  <!-- DODAWANIE POSTA -->
+  <!-- dodawanie posta -->
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body">
       <div class="d-flex align-items-center gap-2">
@@ -35,7 +34,7 @@
     </div>
   </div>
 
-  <!-- LISTA POSTÓW -->
+  <!-- lista z postami już dodanymi -->
   <div class="d-flex flex-column gap-3">
     <div *ngFor="let post of posts" class="card border-0 shadow-sm">
       <div class="card-body p-0">
@@ -55,7 +54,6 @@
                 {{ post.author || 'Name Surname' }}
               </div>
 
-              <!-- ZMIANA: Wyświetlanie sformatowanej daty -->
               <!-- Używamy post.createdAt (nowe) lub post.id (stare, bo id to timestamp) -->
               <div class="text-secondary small" style="font-size: 0.75rem; margin-top: -2px;">
                 {{ (post.id) | date:'medium' }}

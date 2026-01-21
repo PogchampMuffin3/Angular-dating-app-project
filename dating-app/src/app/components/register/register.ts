@@ -18,7 +18,6 @@ export class Register {
     password: ''
   };
 
-  // ZMIANA: Boolean zamiast String (jak w Login)
   registerError = false;
 
   private authService = inject(Auth);
@@ -27,7 +26,6 @@ export class Register {
   onRegister() {
     this.registerError = false;
 
-    // Walidacja: czy pola są puste?
     if (!this.registerData.firstName || !this.registerData.lastName || 
         !this.registerData.email || !this.registerData.password) {
       this.registerError = true;
@@ -44,7 +42,7 @@ export class Register {
         },
         error: (err) => {
           console.error(err);
-          this.registerError = true; // Pokaż błąd w razie problemów z serwerem
+          this.registerError = true;
         }
       });
   }

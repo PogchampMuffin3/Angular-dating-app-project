@@ -30,14 +30,8 @@ export class Profile implements OnInit {
 
   loadMyPosts() {
     this.postService.getPosts().subscribe(data => {
-      // Filtrujemy posty tylko dla zalogowanego użytkownika (lub np. wg ID z URL, jeśli robisz podgląd innych)
-      // Tutaj zakładam profil "Mój", więc filtruję po this.myId (o ile post ma pole authorId, lub po nazwie autora)
-      
-      // Proste filtrowanie po autorze (dopasuj do swojego API/modelu danych)
       const currentUser = this.authService.getCurrentUserValue();
       if(currentUser) {
-         // Zakładam, że w postach jest pole 'author' z nazwą lub 'authorId'
-         // Jeśli nie masz ID autora w poście, filtruj po nazwie:
          this.posts = data.filter(p => p.author === currentUser.name).slice().reverse();
       } else {
          this.posts = [];

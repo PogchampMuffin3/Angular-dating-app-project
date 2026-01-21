@@ -1,4 +1,3 @@
-<!-- messages.html -->
 
 <style>
   .chat-sidebar {
@@ -18,7 +17,7 @@
 
 <div class="messages-container d-flex h-100 w-100 position-relative">
 
-  <!-- CZAT -->
+  <!-- czat -->
   <section 
     class="flex-column flex-grow-1 bg-white desktop-visible"
     [class.d-flex]="selectedUser" 
@@ -26,13 +25,12 @@
     style="min-width: 0;"
   >
 
-    <!-- HEADER -->
+    <!-- header -->
     <div *ngIf="selectedUser" class="p-3 border-bottom d-flex align-items-center gap-3 bg-white" style="height: 72px;">
       <button (click)="selectedUser = null" class="btn btn-link text-dark p-0 d-md-none me-2">
         <i class="bi bi-arrow-left fs-4"></i>
       </button>
 
-      <!-- ZMIANA: Awatar w nagłówku rozmowy -->
       <div 
         class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold"
         [ngClass]="selectedUser.avatarColor || 'bg-secondary'"
@@ -53,7 +51,7 @@
        <span class="fw-bold text-secondary">Select a chat</span>
     </div>
 
-    <!-- WIADOMOŚCI -->
+    <!-- wiadomości -->
     <div class="flex-grow-1 overflow-auto p-4 d-flex flex-column" style="background-color: #f0f2f5;">
       
       <ng-container *ngIf="selectedUser; else noChatSelected">
@@ -81,7 +79,7 @@
       </ng-template>
     </div>
 
-    <!-- INPUT -->
+    <!-- input -->
     <div *ngIf="selectedUser" class="p-3 bg-white border-top">
       <div class="d-flex align-items-center gap-2 bg-white p-1 rounded-pill border">
         <input [(ngModel)]="newMessageText" (keyup.enter)="sendMessage()"
@@ -95,7 +93,7 @@
     </div>
   </section>
 
-  <!-- LISTA ROZMÓW -->
+  <!-- lista rozmów -->
   <aside 
     class="chat-sidebar flex-column bg-white desktop-visible"
     [class.d-flex]="!selectedUser"
@@ -117,7 +115,6 @@
                 [class.bg-light]="selectedUser?.id === user.id">
           
           <div class="position-relative">
-            <!-- Dynamiczny awatar na liście -->
             <div 
               class="rounded-circle border d-flex align-items-center justify-content-center text-white fw-bold"
               [ngClass]="user.avatarColor || 'bg-secondary'"

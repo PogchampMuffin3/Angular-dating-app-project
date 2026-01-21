@@ -18,7 +18,7 @@ export class Auth {
     return this.http.post<any>('http://localhost:3000/login', {email, password: pass}).pipe(
       tap(response => {
         if (response.token) {
-          console.log("Token JWT:", response.token); // Pokaż to prowadzącemu!
+          console.log("Token JWT:", response.token);
 
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));

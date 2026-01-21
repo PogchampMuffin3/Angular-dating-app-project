@@ -1,17 +1,16 @@
-<!-- login.html -->
 
 <div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
   <div class="card border-0 shadow-sm p-4" style="max-width: 400px; width: 100%;">
     <div class="card-body text-center">
       
-      <!-- Nagłówek -->
+      <!-- nagłówek -->
       <div class="mb-5">
         <h1 class="fw-bold text-primary mb-0" style="font-size: 2.5rem; letter-spacing: -1px;">
           SocialApp
         </h1>
       </div>
       
-      <!-- Formularz -->
+      <!-- formularz -->
       <form>
         <div class="mb-3">
           <input 
@@ -34,9 +33,7 @@
             (input)="loginError = false"
           >
         </div>
-
-        <!-- KOMUNIKAT BŁĘDU -->
-        <!-- Używam zwykłego stylu text-danger, który na pewno zadziała -->
+        
         <div *ngIf="loginError" class="mb-3 text-danger fw-bold small">
            Wrong email or password
         </div>

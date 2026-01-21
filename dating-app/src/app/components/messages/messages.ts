@@ -24,16 +24,14 @@ export class Messages implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
-    // Pobieramy swoje ID
     const currentUser = this.authService.getCurrentUserValue();
     if (currentUser) {
       this.myId = currentUser.id;
     }
 
-    // Pobieramy listę znajomych do czatu
+    // Pobieranie listy znajomych do czatu bez siebie samego
     this.messageService.getConversations().subscribe({
       next: (data) => {
-        // Usuwamy siebie z listy
         this.users = data.filter(u => u.id !== this.myId);
         this.cdr.detectChanges();
       },

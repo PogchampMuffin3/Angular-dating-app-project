@@ -1,12 +1,11 @@
-<!-- layout.html -->
 
 <div class="app-shell d-flex flex-column min-vh-100 bg-light">
 
-  <!-- Topbar -->
+  <!-- topbar -->
   <header class="app-topbar sticky-top bg-white border-bottom z-3">
     <div class="container-fluid px-2 px-md-4 py-2 d-flex align-items-center justify-content-between gap-2">
 
-      <!-- Lewa strona -->
+      <!-- lewa strona -->
       <div class="d-flex align-items-center gap-2 flex-grow-1">
         <a routerLink="/feed" class="text-decoration-none d-none d-md-inline-flex align-items-center">
           <div class="rounded-3 border d-flex align-items-center justify-content-center"
@@ -15,7 +14,7 @@
           </div>
         </a>
 
-        <!-- Wyszukiwarka główna -->
+        <!-- wyszukiwarka główna -->
         <div class="flex-grow-1 d-flex align-items-center bg-light rounded-pill px-3"
              style="min-height:38px; max-width: 600px;">
           <i class="bi bi-search text-secondary me-2"></i>
@@ -28,7 +27,7 @@
         </div>
       </div>
 
-      <!-- Prawa strona -->
+      <!-- prawa strona -->
       <div class="d-none d-md-flex align-items-center gap-3">
         <div class="ms-3">
           <h6 class="mb-0 fw-bold">{{ currentUser?.name || 'Użytkownik' }}</h6>
@@ -44,10 +43,10 @@
     </div>
   </header>
 
-  <!-- Body -->
+  <!-- body -->
   <div class="app-body d-flex flex-grow-1">
 
-    <!-- Sidebar (Lewy) -->
+    <!-- sidebar (lewy) -->
     <aside class="app-sidebar d-none d-md-flex flex-column bg-white border-end"
            style="width:240px;">
       <div class="p-3">
@@ -70,14 +69,13 @@
       </div>
     </aside>
 
-    <!-- Main Content -->
     <main class="app-main flex-grow-1 px-2 px-md-3 py-3">
       <router-outlet></router-outlet>
     </main>
 
   </div>
 
-  <!-- Bottom Nav (Mobile) -->
+  <!-- bottom bar -->
   <nav class="app-bottomnav navbar fixed-bottom navbar-light bg-white border-top d-md-none py-2 z-3">
     <div class="container-fluid d-flex justify-content-between px-3">
       <a routerLink="/feed" routerLinkActive="text-primary" class="nav-link text-secondary p-2">
