@@ -45,15 +45,6 @@
   ],
   "posts": [
     {
-      "id": 1767920026497,
-      "author": "Jakub Rosa",
-      "avatarColor": "bg-secondary",
-      "time": "Przed chwilą",
-      "content": "asd",
-      "likes": 0,
-      "likedBy": []
-    },
-    {
       "id": 1768849307185,
       "author": "Anna Nowak",
       "avatarColor": "bg-danger",
@@ -70,22 +61,11 @@
       "author": "Anna Nowak",
       "avatarColor": "bg-danger",
       "time": "Przed chwilą",
-      "content": "KEK",
+      "content": "Litwo ojczyzno moja...",
       "likes": 2,
       "likedBy": [
         2,
         3
-      ]
-    },
-    {
-      "id": 1768851039808,
-      "author": "Gosc",
-      "avatarColor": "bg-secondary",
-      "time": "Przed chwilą",
-      "content": "csa",
-      "likes": 1,
-      "likedBy": [
-        1
       ]
     },
     {
@@ -98,18 +78,6 @@
       "likedBy": [
         3,
         1,
-        1768939047266
-      ]
-    },
-    {
-      "id": 1768852342138,
-      "author": "Jakub Rosa v2",
-      "avatarColor": "bg-secondary",
-      "time": "Przed chwilą",
-      "content": "hej",
-      "likes": 2,
-      "likedBy": [
-        1768852338626,
         1768939047266
       ]
     },
@@ -150,9 +118,10 @@
       "avatarColor": "bg-primary",
       "time": "Przed chwilą",
       "content": "Co słychać u was?",
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        1768939047266
+        1768939047266,
+        1768937838758
       ]
     }
   ],
