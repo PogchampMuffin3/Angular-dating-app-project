@@ -2,7 +2,7 @@
 <div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
   <div class="card border-0 shadow-sm p-4" style="max-width: 400px; width: 100%;">
     <div class="card-body text-center">
-      
+
       <!-- header -->
       <div class="mb-5">
         <h1 class="fw-bold text-primary mb-0" style="font-size: 2.5rem; letter-spacing: -1px;">
@@ -10,13 +10,13 @@
         </h1>
         <p class="text-secondary small mt-2">Create a new account</p>
       </div>
-      
+
       <!-- formularz -->
       <form>
         <div class="mb-3">
-          <input 
-            type="text" 
-            class="form-control bg-light border-0 py-2 px-3" 
+          <input
+            type="text"
+            class="form-control bg-light border-0 py-2 px-3"
             placeholder="First Name"
             [(ngModel)]="registerData.firstName"
             name="firstName"
@@ -24,9 +24,9 @@
           >
         </div>
         <div class="mb-3">
-          <input 
-            type="text" 
-            class="form-control bg-light border-0 py-2 px-3" 
+          <input
+            type="text"
+            class="form-control bg-light border-0 py-2 px-3"
             placeholder="Last Name"
             [(ngModel)]="registerData.lastName"
             name="lastName"
@@ -34,9 +34,9 @@
           >
         </div>
         <div class="mb-3">
-          <input 
-            type="email" 
-            class="form-control bg-light border-0 py-2 px-3" 
+          <input
+            type="email"
+            class="form-control bg-light border-0 py-2 px-3"
             placeholder="Email Address"
             [(ngModel)]="registerData.email"
             name="email"
@@ -44,9 +44,9 @@
           >
         </div>
         <div class="mb-4">
-          <input 
-            type="password" 
-            class="form-control bg-light border-0 py-2 px-3" 
+          <input
+            type="password"
+            class="form-control bg-light border-0 py-2 px-3"
             placeholder="Password"
             [(ngModel)]="registerData.password"
             name="password"
@@ -55,19 +55,19 @@
         </div>
 
         <div *ngIf="registerError" class="mb-3 text-danger fw-bold small">
-           Fill all fields
+           Error occurred
         </div>
 
-        <button 
-          type="button" 
-          (click)="onRegister()" 
+        <button
+          type="button"
+          (click)="onRegister()"
           class="btn btn-primary w-100 fw-bold py-2 rounded-3 mb-3"
         >
           Sign Up
         </button>
-        
+
         <div class="mt-4 text-center small text-secondary">
-          Already have an account? 
+          Already have an account?
           <a routerLink="/login" class="text-decoration-none text-primary fw-semibold ms-1">
             Log In
           </a>
